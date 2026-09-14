@@ -142,6 +142,19 @@
   }
   if (rp && rx) { rp.addEventListener("input", calc); rx.addEventListener("input", calc); calc(); }
 
+
+  /* ---------- polaroids : clic = retournement ---------- */
+  document.querySelectorAll(".pola-flip").forEach(function(p){
+    function flip(){
+      var on = !p.classList.contains("is-flipped");
+      p.classList.toggle("is-flipped", on);
+      p.setAttribute("aria-pressed", String(on));
+    }
+    p.addEventListener("click", flip);
+    p.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); }
+    });
+  });
   /* ---------- formulaire → mailto ---------- */
   var form = document.getElementById("contactForm");
   if (form) form.addEventListener("submit", function(e){

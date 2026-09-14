@@ -329,6 +329,38 @@
     transform:rotate(-3deg);flex:none;
   }
   .pola .stamp.sig{border-color:#A97B3F;color:#A97B3F}
+
+  /* ---------- polaroid recto/verso ---------- */
+  .pola-flip{perspective:1400px;background:transparent;border:none;box-shadow:none;padding:0;cursor:pointer;outline-offset:6px}
+  .pola-flip:hover{transform:rotate(0) scale(1.05);box-shadow:none}
+  .pola-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,.9,.25,1)}
+  .pola-flip.is-flipped .pola-inner{transform:rotateY(180deg)}
+  .pola-face{
+    background:#FDFBF5;border:1px solid rgba(33,31,26,.2);padding:12px 12px 14px;
+    box-shadow:4px 6px 0 rgba(33,31,26,.14);backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  }
+  .pola-flip:hover .pola-face{box-shadow:9px 13px 0 rgba(33,31,26,.18)}
+  .pola-front{position:relative}
+  .pola-back{
+    position:absolute;inset:0;transform:rotateY(180deg);
+    display:flex;flex-direction:column;padding:26px 18px 16px;overflow:hidden;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 27px, rgba(33,31,26,.09) 27px 28px),
+      #FDFBF5;
+    background-position:0 34px;
+  }
+  .pola-back .tape{top:-13px;left:50%;margin-left:-48px;transform:rotate(3deg)}
+  .back-title{font-family:var(--font-hand);font-size:26px;line-height:1;color:var(--ink)}
+  .back-gamme{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tomate);margin-top:6px}
+  .back-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:2px}
+  .back-list li{font-family:var(--font-hand);font-size:19px;line-height:28px;color:var(--pencil);padding-left:18px;position:relative}
+  .back-list li::before{content:"–";position:absolute;left:2px;color:var(--tomate)}
+  .back-star{font-family:var(--font-hand);font-size:17px;color:var(--basilic);margin-top:8px;line-height:1.2}
+  .back-all{margin-top:auto;padding-top:10px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.04em;color:var(--soft);line-height:1.4}
+  .back-note{font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;color:var(--tomate);margin-top:4px}
+  .back-hint{position:absolute;right:12px;bottom:10px;font-family:var(--font-hand);font-size:15px;color:var(--soft)}
+  @media(max-width:480px){.back-list li{font-size:16px;line-height:24px}.back-title{font-size:22px}}
+  @media(prefers-reduced-motion:reduce){.pola-inner{transition:none}}
   @media(max-width:1000px){.pola-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:480px){.pola-grid{grid-template-columns:1fr 1fr;gap:14px}.pola .cap .n{font-size:18px}}
 
