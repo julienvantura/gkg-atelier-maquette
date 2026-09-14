@@ -114,6 +114,21 @@
     });
   }
 
+  /* ---------- film : lecture muette quand visible, pause hors écran ---------- */
+  var filmObservers = [];
+  function setupFilm(video, replayBtn){
+    if (!video) return;
+    video.muted = true;
+    var tryPlay = function(){ var p = video.play(); if (p && p.catch) p.catch(function(){}); };
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ en.isIntersecting ? tryPlay() : video.pause(); });
+      }, { threshold: .2 });
+      io.observe(video);
+      filmObservers.push(io);
+    } else tryPlay();
+    if (replayBtn) replayBtn.addEventListener("click", function(){ video.currentTime = 0; tryPlay(); });
+  }
   /* ---------- simulateur ---------- */
   var rp = document.getElementById("rangePizzas");
   var rx = document.getElementById("rangePrix");
@@ -283,6 +298,8 @@
         });
       }
     });
+    /* la tablette : autoplay muet quand elle entre à l'écran */
+    setupFilm(document.getElementById("tabletVideo"), document.getElementById("tabletReplay"));
     /* l'ardoise : les euros comptent sous les yeux */
     var mb = document.getElementById("moneyMois"), ma = document.getElementById("moneyAn");
     if (mb && ma) {
