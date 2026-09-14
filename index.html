@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Recette GKG — maquette de refonte</title>
+  <meta name="description" content="Maquette de refonte gkg-distribution.com (proposition 2, direction atelier) : GKG Distribution, importateur exclusif Augusto à La Réunion.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✏️</text></svg>">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Archivo:wght@400;500;600;700&family=Caveat:wght@500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="wipe" id="wipe" aria-hidden="true">
+  <div class="wipe-panel p1"></div>
+  <div class="wipe-panel p2"></div>
+  <div class="wipe-stamp">
+    <span class="stamp-ink">GKG Distribution<small>La Réunion · 974</small></span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="gkg-mark" href="#/" data-route aria-label="GKG Distribution — accueil">
+      <span class="g">GKG Distribution<small>Importateur · La Réunion</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#/" data-route data-nav="home">Accueil</a>
+      <a href="#/pizzas" data-route data-nav="pizzas">La carte</a>
+      <a href="#/solution" data-route data-nav="solution">La solution</a>
+      <a href="#/gkg" data-route data-nav="gkg">Pourquoi GKG</a>
+      <a href="#/contact" data-route data-nav="contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+262692019034">+262 692 019 034</a>
+      <a class="btn btn-ink" href="#/contact" data-route>Étude gratuite</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobmenu" id="mobmenu">
+  <nav aria-label="Menu mobile">
+    <a class="mlink" href="#/" data-route data-nav="home"><em>01.</em>Accueil</a>
+    <a class="mlink" href="#/pizzas" data-route data-nav="pizzas"><em>02.</em>La carte</a>
+    <a class="mlink" href="#/solution" data-route data-nav="solution"><em>03.</em>La solution</a>
+    <a class="mlink" href="#/gkg" data-route data-nav="gkg"><em>04.</em>Pourquoi GKG</a>
+    <a class="mlink" href="#/contact" data-route data-nav="contact"><em>05.</em>Contact</a>
+  </nav>
+  <div class="mfoot">
+    <a href="tel:+262692019034">+262 692 019 034</a>
+    <a href="mailto:contact@gkg-distribution.com">contact@gkg-distribution.com</a>
+    <a class="btn btn-ink" href="#/contact" data-route>Demander une étude gratuite</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ==================================================================== -->
+<!-- PAGE : ACCUEIL -->
+<!-- ==================================================================== -->
+<section class="page" data-page="home" id="page-home">
+
+  <div class="hero">
+    <div class="hero-bigword" aria-hidden="true">Clé en<br>main</div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow reveal">GKG Distribution — La Réunion</p>
+        <h1><span class="hline"><span class="hline-in">On apporte <span class="hl">tous<svg class="hl-svg" viewBox="0 0 100 44" preserveAspectRatio="none" aria-hidden="true"><path id="hlStroke" fill="none" stroke-linecap="round"/></svg></span> les ingrédients.</span></span><span class="hline"><span class="hline-in tomate">Vous vendez les pizzas.</span></span></h1>
+        <p class="hero-sub reveal">GKG Distribution importe, installe et entretient les corners pizza <strong>Augusto</strong> partout à La Réunion : le four, les pizzas artisanales, la formation, le SAV. <strong>Vous n'avez rien à savoir faire.</strong></p>
+        <div class="hero-ctas reveal">
+          <a class="btn btn-ink" href="#/contact" data-route>Demander une étude gratuite <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#/pizzas" data-route>Voir la carte</a>
+        </div>
+        <span class="hero-note reveal">audit + dégustation offerts, partout sur l'île ↴</span>
+      </div>
+      <div class="hero-plate">
+        <div class="plate" id="heroPlate">
+          <img src="assets/img/pizza-meridionale-augusto-vue-de-dessus.jpg" alt="Pizza Méridionale Augusto vue de dessus">
+        </div>
+        <svg class="plate-steam" viewBox="0 0 160 92" aria-hidden="true"><path class="steam-p"/><path class="steam-p"/><path class="steam-p"/></svg>
+        <div class="price-tag" aria-hidden="true">
+          <span class="pt-string"></span>
+          <span class="pt-body">rentable dès<b>1 pizza / jour</b></span>
+        </div>
+        <span class="tape plate-tape1" aria-hidden="true"></span>
+        <span class="tape plate-tape2" aria-hidden="true"></span>
+        <div class="sticker-augusto">
+          <img src="assets/img/augusto-bien-plus-qu-une-pizza.png" alt="Augusto — bien plus qu'une pizza">
+          <span>Produit officiel · France</span>
+        </div>
+        <span class="plate-note" aria-hidden="true">servie en 2 minutes<svg viewBox="0 0 70 34"><path id="plateArrow" stroke="#4A463D" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="hero-stat"><b>2 min</b><span>de cuisson, chrono</span></div>
+        <div class="hero-stat"><b>0</b><span>pizzaïolo requis</span></div>
+        <div class="hero-stat"><b>18<em>mois</em></b><span>de conservation (DLC)</span></div>
+        <div class="hero-stat"><b>1<em>pizza/j</em></b><span>suffit à amortir le four</span></div>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true">
+      <span>scroll</span>
+      <svg viewBox="0 0 22 38"><path id="cueArrow" stroke="#4A463D" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+  <div class="marquees" aria-hidden="true">
+    <div class="marquee mq1">
+      <div class="marquee-track">
+        <span class="marquee-item">Corner pizza clé en main</span>
+        <span class="marquee-item">Importé &amp; installé par GKG</span>
+        <span class="marquee-item">Pizzas artisanales Augusto</span>
+        <span class="marquee-item">SAV péi</span>
+        <span class="marquee-item">Corner pizza clé en main</span>
+        <span class="marquee-item">Importé &amp; installé par GKG</span>
+        <span class="marquee-item">Pizzas artisanales Augusto</span>
+        <span class="marquee-item">SAV péi</span>
+      </div>
+    </div>
+    <div class="marquee mq2">
+      <div class="marquee-track">
+        <span class="marquee-item">Fabriqué en France</span>
+        <span class="marquee-item">Cuisson 2 minutes</span>
+        <span class="marquee-item">Zéro perte</span>
+        <span class="marquee-item">Rentable dès 1 pizza / jour</span>
+        <span class="marquee-item">Fabriqué en France</span>
+        <span class="marquee-item">Cuisson 2 minutes</span>
+        <span class="marquee-item">Zéro perte</span>
+        <span class="marquee-item">Rentable dès 1 pizza / jour</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- pluie de stickers : tout est livré -->
+  <div class="section livraison">
+    <div class="wrap livr-grid">
+      <div>
+        <p class="eyebrow">La solution clé en main</p>
+        <h2 class="title reveal">Un colis GKG,<br>et votre corner <span class="tomate">est prêt</span></h2>
+        <p class="lead reveal">La restauration n'est pas votre métier ? C'est justement pour vous. <strong>Chaque pièce du corner arrive avec le colis</strong> — il ne manque que votre comptoir.</p>
+        <div class="hero-ctas reveal">
+          <a class="btn btn-ink" href="#/solution" data-route>Découvrir la solution <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="drop-zone reveal" id="dropZone" aria-label="Tout ce qui est livré avec l'offre">
+        <span class="dz-label">Livré chez vous ↓</span>
+        <span class="stk s-ink">le four UNO</span>
+        <span class="stk s-tomate">8 recettes artisanales</span>
+        <span class="stk s-kraft">la formation</span>
+        <span class="stk s-out">le programme fidélité</span>
+        <span class="stk s-kraft">les boîtes à pizza</span>
+        <span class="stk s-ink">la PLV &amp; les menus</span>
+        <span class="stk s-out">l'audit gratuit</span>
+        <span class="stk s-tomate">le réappro sur l'île</span>
+        <span class="stk s-ink">la dégustation</span>
+        <span class="stk s-out">0 travaux</span>
+        <span class="stk s-kraft">le SAV en direct</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- l'ardoise : les euros -->
+  <div class="section money">
+    <div class="wrap">
+      <p class="eyebrow">Faites le calcul</p>
+      <p class="money-hand reveal">avec seulement 15 pizzas par jour, c'est déjà —</p>
+      <div class="money-card">
+        <span class="tape" aria-hidden="true"></span>
+        <p class="money-big"><span id="moneyMois">5 400</span>&nbsp;€ <em>/ mois</em></p>
+        <p class="money-sub">soit <b id="moneyAn">64 800</b> € de chiffre d'affaires par an — à 12 € la pizza, tarifs libres</p>
+      </div>
+      <div class="hero-ctas reveal" style="justify-content:center">
+        <a class="btn btn-ink" href="#/solution" data-route>Faire le calcul pour mon établissement <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- teaser carte -->
+  <div class="section">
+    <div class="wrap fan-tease">
+      <div>
+        <p class="eyebrow">La carte Augusto</p>
+        <h2 class="title reveal">8 recettes artisanales,<br>2 gammes</h2>
+        <p class="lead reveal">Des incontournables de la gamme <strong>Classique</strong> aux créations <strong>Signature</strong> — Raclette de Savoie AOP, huile de truffe &amp; mascarpone. Gamme Halal disponible.</p>
+        <div class="hero-ctas reveal">
+          <a class="btn btn-ink" href="#/pizzas" data-route>Voir toute la carte <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="fan reveal" aria-hidden="true">
+        <figure class="pola"><span class="tape"></span><div class="ph"><img src="assets/img/pizza-montagnarde-augusto-a-la-raclette-de-savoi.jpg" alt=""></div><figcaption class="cap"><span class="n">Montagnarde</span></figcaption></figure>
+        <figure class="pola"><span class="tape"></span><div class="ph"><img src="assets/img/pizza-margherita-augusto.jpg" alt=""></div><figcaption class="cap"><span class="n">Margherita</span></figcaption></figure>
+        <figure class="pola"><span class="tape"></span><div class="ph"><img src="assets/img/pizza-raffinee-augusto-huile-de-truffe-et-mascar.jpg" alt=""></div><figcaption class="cap"><span class="n">Raffinée</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- références -->
+  <div class="section" style="padding-top:0;padding-bottom:60px">
+    <div class="wrap">
+      <div class="refs" style="margin-top:0">
+        <p class="aud-label">Ils proposent déjà Augusto</p>
+        <div class="refs-marquee" aria-hidden="true">
+          <div class="refs-track">
+            <span class="ref-name">Ibis</span><span class="ref-name">Mercure</span><span class="ref-name">Novotel</span><span class="ref-name">B&amp;B Hôtels</span><span class="ref-name">Kyriad</span><span class="ref-name">Accor</span><span class="ref-name">Louvre Hotels</span><span class="ref-name">Carrefour City</span><span class="ref-name">TotalEnergies</span><span class="ref-name">Casinos JOA</span><span class="ref-name">Laser Game Evolution</span><span class="ref-name">Arkéa Arena</span>
+            <span class="ref-name">Ibis</span><span class="ref-name">Mercure</span><span class="ref-name">Novotel</span><span class="ref-name">B&amp;B Hôtels</span><span class="ref-name">Kyriad</span><span class="ref-name">Accor</span><span class="ref-name">Louvre Hotels</span><span class="ref-name">Carrefour City</span><span class="ref-name">TotalEnergies</span><span class="ref-name">Casinos JOA</span><span class="ref-name">Laser Game Evolution</span><span class="ref-name">Arkéa Arena</span>
+          </div>
+        </div>
+        <p class="refs-proof"><span><b>1 800</b> partenaires en France</span><span><b>19</b> responsables régionaux</span><span>Importé à La Réunion par <b>GKG</b></span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctaband">
+    <div class="wrap">
+      <span class="handline reveal">on s'occupe de tout, promis —</span>
+      <p class="bigline reveal">Votre corner pizza<br>ouvre <em>dans 30 jours</em></p>
+      <a class="btn btn-ink reveal" href="#/contact" data-route>Demander une étude gratuite <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- PAGE : LA CARTE -->
+<!-- ==================================================================== -->
+<section class="page" data-page="pizzas" id="page-pizzas" hidden>
+  <div class="pagehead">
+    <span class="bignum" aria-hidden="true">02</span>
+    <div class="wrap">
+      <p class="eyebrow">La carte Augusto</p>
+      <h2 class="title reveal">8 recettes, épinglées<br>au mur de <span class="tomate">l'atelier</span></h2>
+      <div class="carte-badges reveal">
+        <span><b>2 gammes</b> — Classique &amp; Signature</span>
+        <span>Base tomate &amp; base blanche</span>
+        <span><b>Gamme Halal</b> disponible</span>
+        <span>Surgelées — DLC 15 à 18 mois</span>
+        <span><b>Tarifs de vente libres</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:20px">
+    <div class="wrap">
+      <div class="pola-grid">
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-margherita-augusto.jpg" alt="Pizza Margherita Augusto" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">Margherita</span><span class="stamp">Classique</span></figcaption>
+        </figure>
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-reine-augusto.jpg" alt="Pizza Reine Augusto" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">Reine</span><span class="stamp">Classique</span></figcaption>
+        </figure>
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-3-fromages-augusto.jpg" alt="Pizza 3 Fromages Augusto" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">3 Fromages</span><span class="stamp">Classique</span></figcaption>
+        </figure>
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-montagnarde-augusto-a-la-raclette-de-savoi.jpg" alt="Pizza Montagnarde Augusto à la Raclette de Savoie AOP" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">Montagnarde</span><span class="stamp sig">Signature</span></figcaption>
+        </figure>
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-raffinee-augusto-huile-de-truffe-et-mascar.jpg" alt="Pizza Raffinée Augusto, huile de truffe et mascarpone" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">Raffinée</span><span class="stamp sig">Signature</span></figcaption>
+        </figure>
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-all-pollo-augusto.jpg" alt="Pizza All Pollo Augusto" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">All Pollo</span><span class="stamp sig">Signature</span></figcaption>
+        </figure>
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-fermiere-augusto.jpg" alt="Pizza Fermière Augusto" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">Fermière</span><span class="stamp sig">Signature</span></figcaption>
+        </figure>
+        <figure class="pola reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph"><img src="assets/img/pizza-meridionale-augusto-vue-de-dessus.jpg" alt="Pizza Méridionale Augusto" loading="lazy"></div>
+          <figcaption class="cap"><span class="n">Méridionale</span><span class="stamp sig">Signature</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <div class="section craft">
+    <div class="wrap craft-grid">
+      <figure class="kraft-frame reveal">
+        <span class="tape" aria-hidden="true"></span>
+        <span class="tape t2" aria-hidden="true"></span>
+        <img src="assets/img/pizza-artisanale-augusto-sur-pelle-en-inox-sorti.jpg" alt="Pizza artisanale Augusto sur pelle en inox, sortie du four">
+        <figcaption>tout juste sortie du four UNO —</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">La fabrication</p>
+        <h2 class="title reveal">Artisanale,<br>de la pâte au service</h2>
+        <div class="craft-list reveal">
+          <div class="craft-item"><span class="n">a.</span><p><b>Pâtons pressés à la main</b> dans les ateliers Augusto, en France.</p></div>
+          <div class="craft-item"><span class="n">b.</span><p><b>Sauce tomate maison</b> et pâte maturée artisanale, pour un goût authentique.</p></div>
+          <div class="craft-item"><span class="n">c.</span><p><b>Ingrédients soigneusement sélectionnés</b>, des incontournables aux recettes Signature.</p></div>
+          <div class="craft-item"><span class="n">d.</span><p><b>Surgélation immédiate</b> : la qualité est figée, la DLC de 15 à 18 mois élimine les pertes.</p></div>
+        </div>
+        <div class="hero-ctas reveal">
+          <a class="btn btn-ink" href="#/contact" data-route>Organiser une dégustation <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- PAGE : LA SOLUTION -->
+<!-- ==================================================================== -->
+<section class="page" data-page="solution" id="page-solution" hidden>
+  <div class="pagehead">
+    <span class="bignum" aria-hidden="true">03</span>
+    <div class="wrap">
+      <p class="eyebrow">La solution clé en main</p>
+      <h2 class="title reveal">Le four, les pizzas,<br>la formation. <span class="tomate">Tout est fourni.</span></h2>
+      <p class="lead reveal">Une offre complète pensée pour les établissements sans cuisine : <strong>matériel professionnel, recettes artisanales, accompagnement de A à Z.</strong></p>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:44px">
+    <div class="wrap craft-grid">
+      <figure class="kraft-frame reveal" id="fourVisual">
+        <span class="tape" aria-hidden="true"></span>
+        <span class="tape t2" aria-hidden="true"></span>
+        <img src="assets/img/four-professionnel-augusto-uno-installe-sur-un-c.jpg" alt="Four professionnel Augusto UNO installé sur un comptoir de bar">
+        <figcaption>le four UNO, posé sur votre comptoir —</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">Le matériel</p>
+        <h2 class="title reveal">Le four UNO.<br>La technologie qui rend tout possible.</h2>
+        <div class="specs reveal">
+          <div class="spec"><span class="k">Install.</span><span class="v">Branchement 220&nbsp;V standard<small>Aucune extraction, aucun travaux d'aménagement</small></span></div>
+          <div class="spec"><span class="k">Cuisson</span><span class="v">Moins de 2 minutes<small>Température et durée pilotées automatiquement</small></span></div>
+          <div class="spec"><span class="k">Usage</span><span class="v">Aucun personnel qualifié requis<small>Technologie brevetée, prise en main immédiate</small></span></div>
+          <div class="spec"><span class="k">Sérénité</span><span class="v">Maintenance &amp; SAV inclus<small>Gérés par GKG pendant toute la durée du contrat</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:10px">
+    <div class="wrap">
+      <p class="eyebrow">Le service</p>
+      <h2 class="title reveal">Du congélateur à l'assiette<br>en 4 gestes</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="s-no">1</span>
+          <h3>Sortez la pizza</h3>
+          <p>Sous blister, directement du congélateur.</p>
+          <svg class="s-arrow" viewBox="0 0 34 22" aria-hidden="true"><path class="arrow-draw"/></svg>
+        </div>
+        <div class="step reveal">
+          <span class="s-no">2</span>
+          <h3>Enfournez</h3>
+          <p>La pizza pré-assemblée glisse dans le four UNO.</p>
+          <svg class="s-arrow" viewBox="0 0 34 22" aria-hidden="true"><path class="arrow-draw"/></svg>
+        </div>
+        <div class="step reveal">
+          <span class="s-no">3</span>
+          <h3>Lancez la cuisson</h3>
+          <p>2 minutes environ, pilotées par le four.</p>
+          <svg class="s-arrow" viewBox="0 0 34 22" aria-hidden="true"><path class="arrow-draw"/></svg>
+        </div>
+        <div class="step reveal">
+          <span class="s-no">4</span>
+          <h3>Servez</h3>
+          <p>C'est prêt. Box, découpe, et au client.</p>
+        </div>
+      </div>
+      <p class="steps-chrono reveal">2 minutes <em>chrono</em> — aucun savoir-faire requis !</p>
+    </div>
+  </div>
+
+  <div class="section simu" id="simulateur">
+    <div class="wrap">
+      <p class="eyebrow">Faites le calcul</p>
+      <h2 class="title reveal">Rentable dès la première<br>pizza vendue par jour</h2>
+      <div class="simu-grid">
+        <div class="calc reveal" role="group" aria-label="Simulateur de chiffre d'affaires">
+          <span class="tape" aria-hidden="true"></span>
+          <h3>Votre chiffre d'affaires, au crayon</h3>
+          <div class="calc-row">
+            <label for="rangePizzas">Pizzas vendues par jour <output id="outPizzas" for="rangePizzas">15</output></label>
+            <input type="range" id="rangePizzas" min="1" max="60" value="15" step="1">
+          </div>
+          <div class="calc-row">
+            <label for="rangePrix">Prix de vente par pizza <output id="outPrix" for="rangePrix">12,00&nbsp;€</output></label>
+            <input type="range" id="rangePrix" min="8" max="16" value="12" step="0.5">
+          </div>
+          <div class="calc-result">
+            <div class="cell"><b id="caMois">5 400 €</b><span>de CA par mois</span></div>
+            <div class="cell"><b id="caAn">64 800 €</b><span>de CA par an</span></div>
+          </div>
+          <p class="calc-note">Estimation indicative : pizzas/jour × prix × 30 jours. Vos tarifs de vente restent entièrement libres.</p>
+        </div>
+        <div class="simu-points">
+          <div class="simu-point reveal">
+            <span class="ico">a.</span>
+            <div>
+              <h3>Location mensuelle du matériel</h3>
+              <p>Pas de gros investissement : la trésorerie est préservée, sans engagement, sans contrainte.</p>
+            </div>
+          </div>
+          <div class="simu-point reveal">
+            <span class="ico">b.</span>
+            <div>
+              <h3>Zéro perte de marchandise</h3>
+              <p>Surgelé, DLC de 15 à 18 mois : vous ne sortez du congélateur que ce que vous vendez.</p>
+            </div>
+          </div>
+          <div class="simu-point reveal">
+            <span class="ico">c.</span>
+            <div>
+              <h3>Programme de fidélité offert</h3>
+              <p>Entièrement financé par Augusto, pour faire revenir vos clients chez vous.</p>
+            </div>
+          </div>
+          <div class="simu-point reveal">
+            <span class="ico">d.</span>
+            <div>
+              <h3>Réappro à la demande</h3>
+              <p>GKG vous réapprovisionne quand vous le souhaitez, partout sur l'île.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <p class="eyebrow">L'accompagnement</p>
+      <h2 class="title reveal">Vous restez concentré sur votre métier.<br>GKG fait le reste.</h2>
+      <div class="phases">
+        <article class="phase reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <span class="when">en amont —</span>
+          <h3>On valide votre projet</h3>
+          <ul>
+            <li><b>Audit gratuit sur site</b> : environnement, fonctionnement, organisation</li>
+            <li>Étude d'un parcours client adapté à votre établissement</li>
+            <li><b>Dégustation</b> et présentation à vos équipes</li>
+          </ul>
+        </article>
+        <article class="phase reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <span class="when">à l'implantation —</span>
+          <h3>On installe tout</h3>
+          <ul>
+            <li>Installation du matériel par nos équipes</li>
+            <li>Mise en place des <b>outils de promotion</b></li>
+            <li><b>Formation de votre personnel</b> au matériel</li>
+          </ul>
+        </article>
+        <article class="phase reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <span class="when">au quotidien —</span>
+          <h3>On reste à vos côtés</h3>
+          <ul>
+            <li><b>Équipe dédiée</b> au suivi de votre offre</li>
+            <li>Promotion des ventes et actions ponctuelles</li>
+            <li><b>Maintenance &amp; SAV</b> pendant toute la durée du contrat</li>
+          </ul>
+        </article>
+      </div>
+      <div class="timeline-strip reveal" role="list" aria-label="Délais de mise en place">
+        <div class="tl-cell" role="listitem"><b>10 jours</b><span>Étude, audit &amp; dégustation</span></div>
+        <div class="tl-cell" role="listitem"><b>24 h</b><span>Validation du financement</span></div>
+        <div class="tl-cell" role="listitem"><b>30 jours max</b><span>Implantation &amp; formation</span></div>
+        <div class="tl-cell" role="listitem"><b>En continu</b><span>Suivi, animation, SAV</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctaband" style="padding-top:30px">
+    <div class="wrap">
+      <span class="handline reveal">étude gratuite, sans engagement —</span>
+      <p class="bigline reveal">On étudie votre projet<br><em>cette semaine ?</em></p>
+      <a class="btn btn-ink reveal" href="#/contact" data-route>Prendre contact <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- PAGE : POURQUOI GKG -->
+<!-- ==================================================================== -->
+<section class="page" data-page="gkg" id="page-gkg" hidden>
+  <div class="pagehead">
+    <span class="bignum" aria-hidden="true">04</span>
+    <div class="wrap">
+      <p class="eyebrow">Pourquoi passer par GKG</p>
+      <h2 class="title reveal">Augusto, c'est le produit.<br><span class="tomate">GKG, c'est la garantie qu'il tourne.</span></h2>
+      <p class="lead reveal">Une marque nationale — 1 800 partenaires en France — et un <strong>distributeur exclusif installé à La Réunion</strong>, qui répond au téléphone et se déplace.</p>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:36px">
+    <div class="wrap">
+      <div class="duo">
+        <article class="duo-card reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <p class="who">La marque</p>
+          <h3>Augusto</h3>
+          <p>Créée en <b>2019 à Bordeaux</b> et distribuée par Davant, la marque Augusto équipe <b>1 800 établissements partenaires</b> en France, animés par 19 responsables régionaux. Lauréate du Réseau Entreprendre dès sa première année.</p>
+          <ul>
+            <li>Ateliers de fabrication <b>installés en France</b></li>
+            <li>Recettes artisanales, <b>pâtons pressés à la main</b></li>
+            <li>Four breveté conçu pour la cuisson parfaite</li>
+          </ul>
+        </article>
+        <article class="duo-card reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <p class="who">Le distributeur exclusif — La Réunion</p>
+          <h3>GKG Distribution</h3>
+          <p>Société réunionnaise basée à <b>La Saline-les-Bains</b>, GKG Distribution importe, installe et anime l'offre Augusto sur toute l'île. <b>Un seul interlocuteur</b>, du premier rendez-vous au SAV.</p>
+          <ul>
+            <li><b>Stock local</b> : réapprovisionnement rapide, partout sur l'île</li>
+            <li><b>Installation &amp; formation</b> assurées sur place</li>
+            <li><b>Maintenance &amp; SAV</b> gérés en direct, sans plateforme distante</li>
+          </ul>
+        </article>
+      </div>
+      <div class="gkg-cards">
+        <article class="gkg-card reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <span class="k-no">n°1</span>
+          <h3>Un interlocuteur unique</h3>
+          <p>Du premier rendez-vous au SAV : <b>Grégory Quitton</b>, fondateur de GKG. Pas de plateforme, pas de ticket, pas d'attente métropole.</p>
+        </article>
+        <article class="gkg-card reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <span class="k-no">n°2</span>
+          <h3>Stock &amp; réappro sur l'île</h3>
+          <p><b>Les pizzas sont stockées à La Réunion.</b> Réapprovisionnement à la demande, partout sur l'île, sans dépendre d'un container.</p>
+        </article>
+        <article class="gkg-card reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <span class="k-no">n°3</span>
+          <h3>Installation &amp; formation sur place</h3>
+          <p>Audit gratuit de votre point de vente, installation du four, <b>formation de vos équipes incluse</b> — en 30 jours maximum.</p>
+        </article>
+        <article class="gkg-card reveal">
+          <svg class="frame" aria-hidden="true"></svg>
+          <span class="k-no">n°4</span>
+          <h3>SAV géré en direct</h3>
+          <p>Maintenance et dépannage <b>pendant toute la durée du contrat</b>, assurés par GKG. Votre corner ne reste jamais à l'arrêt.</p>
+        </article>
+      </div>
+      <div class="gregory reveal">
+        <span class="tape" aria-hidden="true"></span>
+        <img src="assets/img/portrait-de-gregory-quitton.jpg" alt="Portrait de Grégory Quitton">
+        <div>
+          <p class="g-name">Grégory Quitton</p>
+          <p class="g-role">« Un four qui tourne, un client qui régale. »</p>
+          <div class="g-links">
+            <a href="tel:+262692019034">+262 692 019 034</a>
+            <a href="mailto:contact@gkg-distribution.com">contact@gkg-distribution.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:10px">
+    <div class="wrap">
+      <p class="eyebrow">Le marché</p>
+      <h2 class="title reveal">La pizza, valeur sûre.<br>Les chiffres parlent.</h2>
+      <div class="market-grid">
+        <div class="m-stat reveal"><b>1<em>er</em></b><span>pays consommateur de pizzas au monde, ex æquo avec les USA</span></div>
+        <div class="m-stat reveal"><b data-num="10" data-suffix="&nbsp;kg">10&nbsp;kg</b><span>de pizzas par an et par habitant en France</span></div>
+        <div class="m-stat reveal"><b data-num="60" data-suffix="&nbsp;%">60&nbsp;%</b><span>des Français en consomment au moins une fois par mois</span></div>
+        <div class="m-stat reveal"><b>1,5<em>Md</em></b><span>de pizzas vendues en France en 2023</span></div>
+      </div>
+      <div class="refs reveal">
+        <p class="aud-label">Ils proposent déjà Augusto</p>
+        <div class="refs-marquee" aria-hidden="true">
+          <div class="refs-track">
+            <span class="ref-name">Ibis</span><span class="ref-name">Mercure</span><span class="ref-name">Novotel</span><span class="ref-name">B&amp;B Hôtels</span><span class="ref-name">Kyriad</span><span class="ref-name">Accor</span><span class="ref-name">Louvre Hotels</span><span class="ref-name">Carrefour City</span><span class="ref-name">TotalEnergies</span><span class="ref-name">Casinos JOA</span><span class="ref-name">Laser Game Evolution</span><span class="ref-name">Arkéa Arena</span>
+            <span class="ref-name">Ibis</span><span class="ref-name">Mercure</span><span class="ref-name">Novotel</span><span class="ref-name">B&amp;B Hôtels</span><span class="ref-name">Kyriad</span><span class="ref-name">Accor</span><span class="ref-name">Louvre Hotels</span><span class="ref-name">Carrefour City</span><span class="ref-name">TotalEnergies</span><span class="ref-name">Casinos JOA</span><span class="ref-name">Laser Game Evolution</span><span class="ref-name">Arkéa Arena</span>
+          </div>
+        </div>
+      </div>
+      <div class="engage">
+        <div class="engage-col reveal">
+          <h3>développement durable</h3>
+          <ul>
+            <li><b>Encre alimentaire</b> sur des boîtes à pizzas recyclables</li>
+            <li>Menus et flyers imprimés sur <b>papier recyclé</b></li>
+            <li>Le surgelé au service de la <b>lutte anti-gaspillage</b></li>
+            <li>Fours <b>reconditionnés</b> en fin de contrat pour une seconde vie</li>
+          </ul>
+        </div>
+        <div class="engage-col reveal">
+          <h3>engagement social</h3>
+          <ul>
+            <li>Ateliers de fabrication <b>installés en France</b>, à Bordeaux</li>
+            <li>Valorisation de l'<b>artisanat culinaire français</b></li>
+            <li>Partenariat avec un <b>ESAT</b> pour l'emploi de personnes en situation de handicap</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctaband" style="padding-top:30px">
+    <div class="wrap">
+      <span class="handline reveal">on vous fait goûter ?</span>
+      <p class="bigline reveal">Rejoignez l'aventure<br><em>Augusto à La Réunion</em></p>
+      <a class="btn btn-ink reveal" href="#/contact" data-route>Contacter Grégory <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- PAGE : CONTACT -->
+<!-- ==================================================================== -->
+<section class="page" data-page="contact" id="page-contact" hidden>
+  <div class="pagehead">
+    <span class="bignum" aria-hidden="true">05</span>
+    <div class="wrap">
+      <p class="eyebrow">On se lance ?</p>
+      <h2 class="title reveal">Ajoutez votre établissement<br><span class="vert">à la recette</span></h2>
+    </div>
+  </div>
+  <div class="section" style="padding-top:30px">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <p class="lead reveal" style="margin-top:0">Parlez-nous de votre établissement. Nous nous déplaçons <strong>partout à La Réunion</strong> pour étudier votre projet.</p>
+          <ul class="contact-points reveal">
+            <li><span><b>Étude et audit gratuits</b> de votre point de vente</span></li>
+            <li><span><b>Dégustation offerte</b> avec vos équipes</span></li>
+            <li><span>Sans engagement, sans contrainte</span></li>
+          </ul>
+          <div class="gregory reveal" style="margin-top:36px">
+            <span class="tape" aria-hidden="true"></span>
+            <img src="assets/img/portrait-de-gregory-quitton.jpg" alt="Portrait de Grégory Quitton">
+            <div>
+              <p class="g-name">Grégory Quitton</p>
+              <p class="g-role">Votre interlocuteur unique — GKG Distribution</p>
+              <div class="g-links">
+                <a href="tel:+262692019034">+262 692 019 034</a>
+                <a href="mailto:contact@gkg-distribution.com">contact@gkg-distribution.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="form reveal" id="contactForm">
+          <span class="tape" aria-hidden="true"></span>
+          <h3>Demander une étude gratuite</h3>
+          <p class="form-sub">Réponse sous 24&nbsp;h ouvrées. Vos informations ne servent qu'à vous recontacter.</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="fNom">Votre nom</label>
+              <input id="fNom" name="nom" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="fTel">Téléphone</label>
+              <input id="fTel" name="tel" type="tel" autocomplete="tel" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="fEtab">Établissement</label>
+              <input id="fEtab" name="etablissement" type="text" placeholder="Hôtel, bar, station…">
+            </div>
+            <div class="field">
+              <label for="fVille">Commune</label>
+              <input id="fVille" name="ville" type="text" placeholder="Saint-Denis, Saint-Pierre…">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fMsg">Votre projet en quelques mots</label>
+            <textarea id="fMsg" name="message"></textarea>
+          </div>
+          <button class="btn btn-ink" type="submit">Envoyer ma demande <span class="arrow">→</span></button>
+          <p class="form-alt">Ou directement : <a href="https://wa.me/262692019034">WhatsApp</a> · <a href="tel:+262692019034">Appeler</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Vos questions</p>
+      <h2 class="title reveal">Tout ce qu'on nous demande<br>avant de se lancer</h2>
+      <div class="faq-list reveal">
+        <details class="faq">
+          <summary>Faut-il savoir faire des pizzas pour proposer Augusto&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer">Non. Les pizzas arrivent <b>pré-assemblées et surgelées</b>. Le four UNO pilote la cuisson automatiquement. N'importe quel membre de votre équipe peut servir une pizza parfaite après une courte formation, incluse dans l'offre.</p>
+        </details>
+        <details class="faq">
+          <summary>Quels travaux faut-il prévoir dans mon établissement&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer">Aucun. Le four se branche sur une <b>prise 220&nbsp;V standard</b> et ne nécessite pas d'extraction. Il s'installe directement sur un comptoir ou un meuble existant.</p>
+        </details>
+        <details class="faq">
+          <summary>En combien de temps mon corner pizza peut-il ouvrir&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer"><b>30 jours maximum</b> après validation du projet : environ 10 jours pour l'étude sur site et la dégustation, 24&nbsp;h pour la validation du financement, puis l'implantation du matériel et la formation de vos équipes.</p>
+        </details>
+        <details class="faq">
+          <summary>Que deviennent les pizzas invendues&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer">Rien ne se perd. Les pizzas se conservent <b>surgelées entre 15 et 18 mois</b> (DLC). Vous ne sortez du congélateur que ce que vous vendez, et GKG vous réapprovisionne à la demande.</p>
+        </details>
+        <details class="faq">
+          <summary>Quel est l'investissement de départ&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer">Le matériel est proposé en <b>location mensuelle</b>, sans gros investissement initial : votre trésorerie est préservée. L'offre s'amortit <b>dès une pizza vendue par jour</b>, et vos tarifs de vente restent entièrement libres.</p>
+        </details>
+        <details class="faq">
+          <summary>Qui s'occupe de la maintenance du four à La Réunion&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer">GKG Distribution, <b>distributeur exclusif Augusto à La Réunion</b>, assure le suivi, la maintenance et le SAV du matériel pendant toute la durée du contrat, avec un interlocuteur unique.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- PAGE : MENTIONS LÉGALES -->
+<!-- ==================================================================== -->
+<section class="page" data-page="legal" id="page-legal" hidden>
+  <div class="pagehead">
+    <div class="wrap">
+      <span class="maquette-tag">Maquette — informations à valider avant mise en ligne</span>
+      <p class="eyebrow">Informations légales</p>
+      <h2 class="title reveal">Mentions légales</h2>
+      <p class="lead reveal">Conformément aux articles 6-III et 19 de la loi n°&nbsp;2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), nous portons à la connaissance des utilisateurs du site gkg-distribution.com les informations suivantes.</p>
+    </div>
+  </div>
+  <div class="section" style="padding-top:10px">
+    <div class="wrap">
+      <div class="legal-body">
+        <h3>Éditeur du site</h3>
+        <ul>
+          <li><b>GKG</b>, société par actions simplifiée (SAS) au capital de 1&nbsp;000&nbsp;€</li>
+          <li>Siège social : <b>4 chemin des Casques, 97434 La Saline-les-Bains</b>, La Réunion</li>
+          <li>Immatriculée au RCS de Saint-Denis de La Réunion sous le numéro <b>920&nbsp;265&nbsp;741</b></li>
+          <li>SIRET : <b>920&nbsp;265&nbsp;741&nbsp;00016</b></li>
+          <li>N° de TVA intracommunautaire : <span class="tbc">à compléter avant mise en ligne</span></li>
+          <li>Téléphone : <b>+262 692 019 034</b></li>
+          <li>Courriel : <b>contact@gkg-distribution.com</b></li>
+          <li>Directeur de la publication : <b>Grégory Quitton</b></li>
+        </ul>
+        <h3>Hébergement</h3>
+        <p>Le site est hébergé par <b>OVH SAS</b>, 2 rue Kellermann, 59100 Roubaix, France — <a href="https://www.ovhcloud.com" rel="noopener">www.ovhcloud.com</a>.</p>
+        <h3>Activité</h3>
+        <p>Le site gkg-distribution.com présente l'activité de la société GKG, <b>distributeur exclusif de la marque Augusto à La Réunion</b> : solutions de corners pizza clé en main destinées aux professionnels. Les informations publiées sont données à titre indicatif et sont susceptibles d'évoluer. Malgré le soin apporté à leur mise à jour, la société GKG ne saurait être tenue responsable d'omissions ou d'inexactitudes.</p>
+        <h3>Propriété intellectuelle</h3>
+        <p>L'ensemble des éléments du site (textes, images, graphismes, logos, icônes) est protégé par le Code de la propriété intellectuelle. <b>Augusto</b> est une marque distribuée par Davant (Bordeaux), utilisée avec autorisation. Toute reproduction, représentation ou adaptation, totale ou partielle, est interdite sans autorisation écrite préalable adressée à contact@gkg-distribution.com. Toute exploitation non autorisée serait constitutive d'une contrefaçon au sens des articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
+        <h3>Données personnelles</h3>
+        <p>Les informations transmises via le formulaire de contact (nom, téléphone, établissement, commune, message) sont utilisées <b>uniquement pour répondre à votre demande</b>. Elles ne sont ni cédées, ni vendues, ni transmises à des tiers.</p>
+        <p>Conformément au Règlement général sur la protection des données (RGPD — règlement UE 2016/679) et à la loi Informatique et Libertés du 6 janvier 1978 modifiée, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité sur les données vous concernant. Pour l'exercer, écrivez à <b>contact@gkg-distribution.com</b>. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>).</p>
+        <h3>Cookies</h3>
+        <p>Ce site n'utilise <b>aucun cookie publicitaire ni traceur tiers</b>. Seuls des cookies techniques strictement nécessaires au fonctionnement du site peuvent être déposés ; ils sont exemptés de consentement. Si un outil de mesure d'audience venait à être ajouté, un bandeau de consentement conforme serait mis en place.</p>
+        <h3>Crédits</h3>
+        <p>Conception et réalisation : <b>Vantura Studio</b>. Photographies : Augusto / GKG Distribution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p class="g">GKG Distribution<small>Importateur exclusif Augusto · La Réunion</small></p>
+        <p>« bien plus qu'une pizza »</p>
+      </div>
+      <div class="foot-col">
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="#/" data-route>Accueil</a></li>
+          <li><a href="#/pizzas" data-route>La carte</a></li>
+          <li><a href="#/solution" data-route>La solution</a></li>
+          <li><a href="#/gkg" data-route>Pourquoi GKG</a></li>
+          <li><a href="#/contact" data-route>Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+262692019034">+262 692 019 034</a></li>
+          <li><a href="mailto:contact@gkg-distribution.com">contact@gkg-distribution.com</a></li>
+          <li>La Saline-les-Bains, La Réunion</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Augusto France</h4>
+        <ul>
+          <li>4 rue de Belfort, 33000 Bordeaux</li>
+          <li>Une marque distribuée par Davant</li>
+          <li>1 800 partenaires en France</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 GKG — Importateur exclusif Augusto, La Réunion · <a href="#/mentions-legales" data-route>Mentions légales</a></span>
+      <span class="vantura">Proposition n°2 « La Recette » — <b>Vantura Studio</b>, septembre 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "GKG Distribution",
+  "description": "Importateur et installateur exclusif des corners pizza Augusto à La Réunion : four professionnel, pizzas artisanales fabriquées en France, formation, réapprovisionnement et SAV sur l'île.",
+  "telephone": "+262692019034",
+  "email": "contact@gkg-distribution.com",
+  "address": { "@type": "PostalAddress", "streetAddress": "4 chemin des Casques", "postalCode": "97434", "addressLocality": "La Saline-les-Bains", "addressRegion": "La Réunion", "addressCountry": "FR" },
+  "areaServed": "La Réunion",
+  "brand": { "@type": "Brand", "name": "Augusto" }
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
