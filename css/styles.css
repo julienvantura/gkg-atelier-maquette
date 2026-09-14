@@ -234,22 +234,20 @@
   .tablet-tape1{top:-12px;left:10%;transform:rotate(-8deg)}
   .tablet-tape2{bottom:-10px;right:8%;transform:rotate(7deg)}
   .tablet-body{
-    background:#1C1B17;border-radius:26px;padding:22px 14px 26px;
-    box-shadow:8px 12px 0 rgba(33,31,26,.18), inset 0 0 0 2px #2B2A25;
-    position:relative;
+    position:relative;border-radius:18px;padding:0;overflow:hidden;
+    background:#000;box-shadow:8px 12px 0 rgba(33,31,26,.18), 0 0 0 3px #1C1B17, 0 0 0 4px rgba(33,31,26,.25);
   }
-  .tablet-cam{position:absolute;top:9px;left:50%;width:7px;height:7px;margin-left:-3px;border-radius:50%;background:#0B0B09;box-shadow:inset 0 0 0 1.5px #3A3933}
-  .tablet-screen{border-radius:10px;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+  .tablet-cam,.tablet-home{display:none}
+  .tablet-screen{border-radius:0;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:none}
   .tablet-video{width:100%;height:100%;object-fit:cover;display:block}
-  .tablet-home{position:absolute;bottom:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:2px;background:#3A3933}
   .tablet-replay{
-    position:absolute;right:26px;bottom:38px;z-index:2;
+    position:absolute;right:16px;bottom:16px;z-index:2;
     font-family:var(--font-hand);font-size:17px;color:var(--paper);
     background:rgba(33,31,26,.72);border:1px solid rgba(243,237,226,.25);border-radius:999px;padding:5px 13px;cursor:pointer;
     opacity:0;transition:opacity .3s;
   }
   .tablet:hover .tablet-replay,.tablet-replay:focus-visible{opacity:1}
-  @media(max-width:920px){.tablet-grid{grid-template-columns:1fr}.tablet{order:-1;margin-bottom:10px}.tablet-body{padding:16px 10px 20px;border-radius:20px}}
+  @media(max-width:920px){.tablet-grid{grid-template-columns:1fr}.tablet{order:-1;margin-bottom:10px}.tablet-body{border-radius:14px}}
   /* ---------- l'ardoise (euros) ---------- */
   .money{text-align:center}
   .money .eyebrow{justify-content:center}
