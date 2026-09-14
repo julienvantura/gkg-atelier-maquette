@@ -228,6 +228,9 @@
     looseTweens = [];
   }
 
+  var INTRO_DELAY = 0;
+  var introUsed = false;
+  function introDelayOnce(){ if (introUsed) return 0; introUsed = true; return INTRO_DELAY; }
   function initReveals(pageEl){
     pageEl.querySelectorAll(".reveal").forEach(function(el){
       var rot = el.classList.contains("pola") ? (Math.random() * 6 - 3) : 0;
@@ -240,13 +243,13 @@
 
   function initHome(pageEl){
     /* entrée hero : lignes du titre en masque + assiette qui se pose */
-    var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    var tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: introDelayOnce() });
     tl.fromTo("#page-home .hline-in", { yPercent: 112 }, { yPercent: 0, duration: .95, stagger: .14, ease: "power4.out" }, .1)
       .fromTo("#page-home .hero-plate", { y: 60, opacity: 0, rotation: 6 }, { y: 0, opacity: 1, rotation: 0, duration: 1.1, ease: "back.out(1.4)", clearProps: "rotation" }, .3);
     /* coup de stabilo vert fluo sur "tous" */
     if (hlStroke) {
       var hlen = hlStroke.getTotalLength();
-      gsap.fromTo(hlStroke, { strokeDasharray: hlen, strokeDashoffset: hlen }, { strokeDashoffset: 0, duration: .5, ease: "power2.inOut", delay: 1.05 });
+      gsap.fromTo(hlStroke, { strokeDasharray: hlen, strokeDashoffset: hlen }, { strokeDashoffset: 0, duration: .5, ease: "power2.inOut", delay: 1.05 + tl.delay() });
     }
     /* assiette : rotation au scroll + flottement continu */
     gsap.to("#heroPlate", {
@@ -344,33 +347,42 @@
   }
 
   var wipe = document.getElementById("wipe");
-  var navigating = false;
+  /* navigation instantanée entre les pages : pas de transition */
   function go(key){
-    if (key === current || navigating) return;
+    if (key === current) return;
     closeMenu();
-    if (!animOn) { killPageAnims(); activate(key); return; }
-    navigating = true;
-    wipe.classList.add("active");
+    killPageAnims();
+    activate(key);
+  }
+
+  /* tampon d'intro : une seule fois, au chargement du site */
+  function intro(){
     var stamp = wipe.querySelector(".wipe-stamp");
+    var p1 = wipe.querySelector(".p1"), p2 = wipe.querySelector(".p2");
+    wipe.classList.add("active");
+    gsap.set([p1, p2], { scaleY: 1, transformOrigin: "top" });
+    gsap.set(stamp, { opacity: 0 });
     var tl = gsap.timeline({
       onComplete: function(){
         wipe.classList.remove("active");
-        gsap.set([wipe.querySelector(".p1"), wipe.querySelector(".p2")], { scaleY: 0, transformOrigin: "bottom" });
-        gsap.set(stamp, { opacity: 0 });
-        navigating = false;
+        gsap.set([p1, p2], { scaleY: 0 });
       }
     });
-    tl.set([wipe.querySelector(".p1"), wipe.querySelector(".p2")], { scaleY: 0, transformOrigin: "bottom" })
-      .to(wipe.querySelector(".p1"), { scaleY: 1, duration: .4, ease: "power4.inOut" }, 0)
-      .to(wipe.querySelector(".p2"), { scaleY: 1, duration: .4, ease: "power4.inOut" }, .08)
-      .fromTo(stamp, { opacity: 0, scale: 1.7, rotation: 4 }, { opacity: 1, scale: 1, rotation: 0, duration: .32, ease: "power4.in" }, .3)
-      .add(function(){ killPageAnims(); activate(key); }, .66)
-      .to(stamp, { opacity: 0, duration: .18 }, 1.0)
-      .set([wipe.querySelector(".p1"), wipe.querySelector(".p2")], { transformOrigin: "top" }, 1.06)
-      .to(wipe.querySelector(".p2"), { scaleY: 0, duration: .48, ease: "power4.inOut" }, 1.1)
-      .to(wipe.querySelector(".p1"), { scaleY: 0, duration: .48, ease: "power4.inOut" }, 1.18);
+    tl.fromTo(stamp, { opacity: 0, scale: 1.7, rotation: 4 }, { opacity: 1, scale: 1, rotation: 0, duration: .32, ease: "power4.in" }, .2)
+      .to(stamp, { opacity: 0, duration: .25 }, 1.1)
+      .to(p2, { scaleY: 0, duration: .55, ease: "power4.inOut" }, 1.25)
+      .to(p1, { scaleY: 0, duration: .55, ease: "power4.inOut" }, 1.35);
   }
 
   window.addEventListener("hashchange", function(){ go(parseRoute()); });
+  INTRO_DELAY = animOn ? 1.4 : 0;
+  if (animOn) intro();
   activate(parseRoute());
+  /* filet de sécurité : si le ticker GSAP est gelé (onglet en arrière-plan), on lève le rideau quand même */
+  setTimeout(function(){
+    if (wipe.classList.contains("active")) {
+      wipe.classList.remove("active");
+      if (hasGsap) gsap.set(wipe.querySelectorAll(".wipe-panel"), { scaleY: 0 });
+    }
+  }, 3200);
 })();
