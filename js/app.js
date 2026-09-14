@@ -87,6 +87,28 @@
   }
   window.addEventListener("resize", drawFrames);
 
+  /* ---------- thème clair / sombre ---------- */
+  (function(){
+    var KEY = "gkg_theme";
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    function apply(t){
+      var nav = document.querySelector(".nav");
+      if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      else document.documentElement.removeAttribute("data-theme");
+      document.querySelectorAll("[data-theme-toggle]").forEach(function(b){ b.setAttribute("aria-pressed", String(t === "dark")); });
+      if (nav) { nav.style.display = "none"; void nav.offsetHeight; nav.style.display = ""; }
+    }
+    apply(saved === "dark" ? "dark" : "light");
+    document.querySelectorAll("[data-theme-toggle]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        apply(next);
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+      });
+    });
+  })();
+
   /* ---------- lenis ---------- */
   var lenis = null;
   if (animOn && typeof Lenis !== "undefined") {
