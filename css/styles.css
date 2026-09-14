@@ -2,7 +2,7 @@
     color-scheme:light;
     --paper:#F3EDE2;
     --paper-2:#FAF6EC;
-    --card:var(--card);
+    --card:#FDFBF5;
     --kraft:#E3D6BC;
     --kraft-2:#D8C7A5;
     --ink:#211F1A;
@@ -11,18 +11,18 @@
     --tomate:#B8321F;
     --tomate-on-kraft:#A32A18;
     --basilic:#3F6A12;
-    --croute:var(--croute);
-    --stabilo:var(--stabilo);
+    --croute:#A97B3F;
+    --stabilo:#B9F03C;
     --on-ink:#F3EDE2;
     --on-tomate:#fff;
-    --line:var(--shadow-strong);
+    --line:rgba(33,31,26,.18);
     --line-soft:rgba(33,31,26,.09);
-    --edge:var(--edge);
-    --shadow:var(--shadow);
-    --shadow-strong:var(--edge);
-    --tape:var(--tape);
-    --nav-glass:var(--nav-glass);
-    --card-glass:var(--card-glass);
+    --edge:rgba(33,31,26,.2);
+    --shadow:rgba(33,31,26,.15);
+    --shadow-strong:rgba(33,31,26,.2);
+    --tape:rgba(216,199,165,.8);
+    --nav-glass:rgba(243,237,226,.88);
+    --card-glass:rgba(253,251,245,.6);
     --font-display:'Bricolage Grotesque','Arial Black',sans-serif;
     --font-body:'Archivo','Helvetica Neue',Arial,sans-serif;
     --font-hand:'Caveat','Comic Sans MS',cursive;
@@ -424,10 +424,11 @@
 
   .fan-tease{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
   .fan{position:relative;height:min(400px,66vw);display:flex;align-items:center;justify-content:center}
-  .fan .pola{position:absolute;width:min(250px,44vw)}
-  .fan .pola:nth-child(1){transform:translateX(-42%) rotate(-9deg)}
+  .fan .pola{position:absolute;width:min(240px,42vw)}
+  .fan .pola:nth-child(1){transform:translate(-62%,-6%) rotate(-10deg)}
   .fan .pola:nth-child(2){transform:rotate(1deg);z-index:2}
-  .fan .pola:nth-child(3){transform:translateX(42%) rotate(8deg)}
+  .fan .pola:nth-child(3){transform:translate(62%,-6%) rotate(9deg)}
+  .fan .pola .cap .n{font-size:20px}
   @media(max-width:920px){.fan-tease{grid-template-columns:1fr}.fan{order:-1}}
 
   /* ---------- badges ---------- */
