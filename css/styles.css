@@ -215,11 +215,8 @@
   .hero-note{margin-top:26px;font-family:var(--font-hand);font-size:22px;color:var(--pencil);transform:rotate(-2deg);display:inline-block}
 
   .hero-plate{position:relative;display:flex;align-items:center;justify-content:center;min-height:340px}
-  .plate{
-    position:relative;width:min(430px,74vw);aspect-ratio:1;border-radius:50%;overflow:hidden;
-    box-shadow:10px 14px 0 var(--shadow);will-change:transform;
-  }
-  .plate img{width:100%;height:100%;object-fit:cover;display:block}
+  .plate{position:relative;width:min(430px,74vw);will-change:transform}
+  .plate img{width:100%;height:auto;display:block;filter:drop-shadow(10px 14px 0 var(--shadow))}
   .plate-tape1{top:-10px;left:16%;transform:rotate(-9deg)}
   .plate-tape2{bottom:2px;right:12%;transform:rotate(12deg)}
   .plate-note{
@@ -693,7 +690,7 @@
   :root[data-theme="dark"] .grain{opacity:.05}
   :root[data-theme="dark"] .hl-svg{mix-blend-mode:screen}
   :root[data-theme="dark"] #hlStroke{opacity:.55}
-  :root[data-theme="dark"] .pola .ph,:root[data-theme="dark"] .plate{box-shadow:0 0 0 1px var(--edge)}
+  :root[data-theme="dark"] .pola .ph{box-shadow:0 0 0 1px var(--edge)}
   :root[data-theme="dark"] .stamp-ink{border-color:var(--tomate);color:var(--tomate)}
   :root[data-theme="dark"] .tablet-replay{color:var(--ink);background:rgba(23,22,15,.75);border-color:var(--edge)}
   /* bouton thème */
