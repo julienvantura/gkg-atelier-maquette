@@ -104,15 +104,13 @@
 
   /* ---------- tampon ---------- */
   .stamp-ink{
-    display:inline-block;border:3px solid var(--tomate);color:var(--tomate);border-radius:2px;
-    font-family:var(--font-display);font-weight:400;text-transform:uppercase;text-align:center;
-    letter-spacing:.16em;text-indent:.16em;
-    padding:14px 26px 12px;transform:rotate(-7deg);line-height:1.05;
+    display:inline-block;color:var(--tomate);text-align:center;
+    transform:rotate(-7deg);line-height:1.05;
     -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.12' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 -3.5'/%3E%3CfeComposite operator='over' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='120' height='120' fill='%23000' filter='url(%23r)'/%3E%3C/svg%3E");
     mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.12' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 -3.5'/%3E%3CfeComposite operator='over' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='120' height='120' fill='%23000' filter='url(%23r)'/%3E%3C/svg%3E");
   }
-  .stamp-ink i{font-style:normal;font-weight:inherit;font-size:1.3em;line-height:0;vertical-align:-.05em}
-  .stamp-ink small{display:block;font-family:var(--font-mono);font-weight:400;font-size:.32em;letter-spacing:.3em;text-indent:.3em;margin-top:6px}
+  .stamp-ink .gkg-logo{width:clamp(210px,34vw,360px)}
+  .stamp-ink small{display:block;font-family:var(--font-mono);font-weight:400;font-size:11px;letter-spacing:.3em;text-indent:.3em;margin-top:14px}
 
   /* ---------- adhésif (washi) ---------- */
   .tape{
@@ -131,7 +129,7 @@
   .wipe-stamp{
     position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;
   }
-  .wipe-stamp .stamp-ink{font-size:clamp(34px,6vw,64px);padding:22px 44px 18px}
+  .wipe-stamp .stamp-ink{padding:0}
 
   /* ---------- nav ---------- */
   .nav{
@@ -141,38 +139,19 @@
   }
   .nav-inner{max-width:1340px;margin:0 auto;padding:0 clamp(16px,3vw,36px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
   .gkg-mark{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ink);flex:none}
-  /* logotype GKG, repris de la marque du client : géométrique léger, lettres espacées,
-     K plus haut que les G, filet du bas interrompu par « Food & Beverage » */
+  /* le logotype officiel de GKG, posé en masque : il prend la couleur du texte,
+     donc il s'adapte au thème clair comme au thème sombre, et au rouge du tampon */
   .gkg-logo{
-    --gl-pad:13px;
-    display:flex;flex-direction:column;flex:none;
-    border:1.4px solid currentColor;border-bottom:none;padding:7px var(--gl-pad) 0;
-  }
-  .gl-mot{
-    font-family:var(--font-display);font-weight:300;font-size:23px;line-height:.96;
-    letter-spacing:.155em;text-indent:.155em;text-align:center;white-space:nowrap;
-  }
-  .gl-mot i{font-style:normal;font-weight:300;font-size:1.36em;line-height:0;vertical-align:-.05em}
-  .gl-pied{
-    display:flex;align-items:center;gap:6px;
-    margin:3px calc(var(--gl-pad) * -1) 0;padding:0 2px;
-  }
-  .gl-pied i{flex:1 0 8px;height:1.4px;background:currentColor;display:block}
-  .gl-pied span{
-    font-family:var(--font-display);font-weight:300;font-size:8.5px;letter-spacing:.02em;
-    white-space:nowrap;transform:translateY(.5px);
+    display:block;flex:none;width:112px;aspect-ratio:948/418;background-color:currentColor;
+    -webkit-mask:url("../assets/img/logo-gkg.png") center/contain no-repeat;
+    mask:url("../assets/img/logo-gkg.png") center/contain no-repeat;
   }
   .gkg-sous{
     font-family:var(--font-mono);font-size:8.5px;line-height:1.5;letter-spacing:.2em;
     text-transform:uppercase;color:var(--soft);
   }
   @media(max-width:520px){.gkg-sous{display:none}}
-  @media(max-width:430px){
-    .gkg-logo{--gl-pad:9px}
-    .gl-mot{font-size:19px}
-    .gl-pied{gap:5px}
-    .gl-pied span{font-size:7.5px}
-  }
+  @media(max-width:430px){.gkg-logo{width:96px}}
   .nav-links{display:flex;gap:24px;align-items:center}
   .nav-links a{color:var(--soft);text-decoration:none;font-size:14px;font-weight:600;transition:color .3s;position:relative;padding:4px 0}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2.5px;width:100%;background:var(--tomate);transform:scaleX(0);transform-origin:right;transition:transform .35s}
@@ -713,10 +692,9 @@
   .gregory .g-badge{
     width:104px;height:104px;flex:none;display:grid;place-items:center;
     background:var(--kraft-2);border:2px solid var(--ink);color:var(--ink);
-    font-family:var(--font-display);font-weight:300;font-size:26px;letter-spacing:.15em;text-indent:.15em;
     transform:rotate(2deg);box-shadow:3px 4px 0 var(--shadow);
   }
-  .gregory .g-badge i{font-style:normal;font-weight:inherit;font-size:1.36em;line-height:0;vertical-align:-.05em}
+  .gregory .g-badge .gkg-logo{width:78px}
   .gregory .g-name{font-family:var(--font-display);font-weight:800;font-size:22px}
   .gregory .g-role{font-family:var(--font-hand);font-size:20px;color:var(--tomate);margin-top:2px}
   .gregory .g-links{margin-top:8px;display:flex;gap:16px;flex-wrap:wrap}
@@ -797,8 +775,7 @@
   footer{padding:56px 0 40px;border-top:2px solid var(--ink);background:var(--paper)}
   .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
   .foot-brand .g{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-  .foot-brand .gkg-logo{--gl-pad:15px;color:var(--ink)}
-  .foot-brand .gl-mot{font-size:26px}
+  .foot-brand .gkg-logo{width:132px;color:var(--ink)}
   .foot-brand .g small{font-family:var(--font-mono);font-weight:400;font-size:9.5px;letter-spacing:.3em;color:var(--soft);text-transform:uppercase}
   .foot-brand p{font-family:var(--font-hand);font-size:20px;color:var(--pencil);margin-top:14px;transform:rotate(-1.5deg)}
   .foot-col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--tomate);font-weight:500;margin-bottom:14px}
