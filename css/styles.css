@@ -300,6 +300,8 @@
   .money .eyebrow{justify-content:center}
   .money .eyebrow::after{content:"";width:34px;height:2px;background:var(--tomate);flex:none}
   .money-hand{font-family:var(--font-hand);font-size:clamp(20px,2.4vw,28px);color:var(--pencil);transform:rotate(-1.5deg);display:inline-block;margin-top:26px}
+  .money-plus{font-family:var(--font-hand);font-size:clamp(18px,2vw,25px);color:var(--pencil);transform:rotate(-1deg);display:inline-block;margin-top:28px;max-width:34ch}
+  .money-plus em{font-style:normal;color:var(--tomate)}
   .money-card{
     display:inline-block;position:relative;margin-top:20px;background:var(--card);
     border:1px solid var(--edge);box-shadow:6px 9px 0 var(--shadow);

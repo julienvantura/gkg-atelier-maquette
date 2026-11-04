@@ -9,7 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✏️</text></svg>">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Archivo:wght@400;500;600;700&family=Caveat:wght@500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=0a205bb6">
+  <link rel="stylesheet" href="css/styles.css?v=a90f3e04">
 </head>
 <body>
 <script>try{if(localStorage.getItem("gkg_theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
@@ -200,6 +200,7 @@
         <p class="money-big"><span id="moneyMois">5 400</span>&nbsp;€ <em>/ mois</em></p>
         <p class="money-sub">soit <b id="moneyAn">64 800</b> € de chiffre d'affaires par an — à 12 € la pizza, tarifs libres</p>
       </div>
+      <p class="money-plus reveal">et ce n'est que la pizza : <em>la boisson, le dessert et l'accompagnement partent avec</em></p>
       <div class="hero-ctas reveal" style="justify-content:center">
         <a class="btn btn-ink" href="#/solution" data-route>Faire le calcul pour mon établissement <span class="arrow">→</span></a>
       </div>
@@ -474,6 +475,7 @@
           <div class="spec"><span class="k">Install.</span><span class="v">Branchement 220&nbsp;V standard<small>Aucune extraction, aucun travaux d'aménagement</small></span></div>
           <div class="spec"><span class="k">Cuisson</span><span class="v">Moins de 2 minutes<small>Température et durée pilotées automatiquement</small></span></div>
           <div class="spec"><span class="k">Usage</span><span class="v">Aucun personnel qualifié requis<small>Technologie brevetée, prise en main immédiate</small></span></div>
+          <div class="spec"><span class="k">Contrat</span><span class="v">Engagement de 24 à 60 mois<small>Durée choisie avec vous à la signature, selon votre projet</small></span></div>
           <div class="spec"><span class="k">Sérénité</span><span class="v">Maintenance &amp; SAV inclus<small>Gérés par GKG pendant toute la durée du contrat</small></span></div>
         </div>
       </div>
@@ -540,7 +542,7 @@
             <span class="ico">a.</span>
             <div>
               <h3>Location mensuelle du matériel</h3>
-              <p>Pas de gros investissement : la trésorerie est préservée, sans engagement, sans contrainte.</p>
+              <p>Pas de gros investissement : votre trésorerie est préservée et la mensualité est connue dès le départ.</p>
             </div>
           </div>
           <div class="simu-point reveal">
@@ -560,8 +562,15 @@
           <div class="simu-point reveal">
             <span class="ico">d.</span>
             <div>
-              <h3>Réappro à la demande</h3>
-              <p>GKG vous réapprovisionne quand vous le souhaitez, partout sur l'île.</p>
+              <h3>Stock local, livré sur toute l'île</h3>
+              <p>Les pizzas sont stockées à La Réunion, avec plusieurs jours de livraison. Vos commandes sont gérées sur place par GKG.</p>
+            </div>
+          </div>
+          <div class="simu-point reveal">
+            <span class="ico">e.</span>
+            <div>
+              <h3>Des ventes qui en entraînent d'autres</h3>
+              <p>Une pizza part rarement seule : boisson, dessert, accompagnement suivent. C'est tout votre ticket moyen qui monte.</p>
             </div>
           </div>
         </div>
@@ -691,7 +700,7 @@
           <h3>GKG</h3>
           <p>Société réunionnaise basée à <b>La Saline-les-Bains</b>, GKG distribue, installe et anime l'offre Augusto sur toute l'île. <b>Un seul interlocuteur</b>, du premier rendez-vous au SAV.</p>
           <ul>
-            <li><b>Stock local</b> : réapprovisionnement rapide, partout sur l'île</li>
+            <li><b>Stock local</b> : plusieurs jours de livraison, partout sur l'île</li>
             <li><b>Installation &amp; formation</b> assurées sur place</li>
             <li><b>Maintenance &amp; SAV</b> gérés en direct, sans plateforme distante</li>
           </ul>
@@ -707,8 +716,8 @@
         <article class="gkg-card reveal">
           <svg class="frame" aria-hidden="true"></svg>
           <span class="k-no">n°2</span>
-          <h3>Stock &amp; réappro sur l'île</h3>
-          <p><b>Les pizzas sont stockées à La Réunion.</b> Réapprovisionnement à la demande, partout sur l'île, sans dépendre d'un container.</p>
+          <h3>Stock &amp; livraisons sur l'île</h3>
+          <p><b>Les pizzas sont stockées à La Réunion.</b> Plusieurs jours de livraison sur toute l'île, et vos commandes gérées sur place par GKG — sans dépendre d'un container.</p>
         </article>
         <article class="gkg-card reveal">
           <svg class="frame" aria-hidden="true"></svg>
@@ -807,7 +816,7 @@
           <ul class="contact-points reveal">
             <li><span><b>Étude et audit gratuits</b> de votre point de vente</span></li>
             <li><span><b>Dégustation offerte</b> avec vos équipes</span></li>
-            <li><span>Sans engagement, sans contrainte</span></li>
+            <li><span><b>Sans engagement</b> de votre part à ce stade</span></li>
           </ul>
           <div class="gregory reveal" style="margin-top:36px">
             <span class="tape" aria-hidden="true"></span>
@@ -871,7 +880,7 @@
         </details>
         <details class="faq">
           <summary>En combien de temps mon corner pizza peut-il ouvrir&nbsp;?<span class="plus">+</span></summary>
-          <p class="answer"><b>30 jours maximum</b> après validation du projet : environ 10 jours pour l'étude sur site et la dégustation, 24&nbsp;h pour la validation du financement, puis l'implantation du matériel et la formation de vos équipes.</p>
+          <p class="answer"><b>30 jours maximum.</b> Après le premier contact, l'audit et la dégustation se font sur rendez-vous chez vous. Le financement est étudié en <b>24 à 72&nbsp;h</b> dès que votre dossier est complet, la première commande part sous 5 jours et le four est installé en <b>5 jours ouvrés</b>.</p>
         </details>
         <details class="faq">
           <summary>Que deviennent les pizzas invendues&nbsp;?<span class="plus">+</span></summary>
@@ -880,6 +889,14 @@
         <details class="faq">
           <summary>Quel est l'investissement de départ&nbsp;?<span class="plus">+</span></summary>
           <p class="answer">Le matériel est proposé en <b>location mensuelle</b>, sans gros investissement initial : votre trésorerie est préservée. L'offre s'amortit <b>dès une pizza vendue par jour</b>, et vos tarifs de vente restent entièrement libres.</p>
+        </details>
+        <details class="faq">
+          <summary>Sur quelle durée s'engage-t-on&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer">Le contrat de location du matériel va de <b>24 à 60 mois</b>. La durée est choisie avec vous à la signature, selon votre projet. Maintenance et SAV sont inclus pendant toute cette durée.</p>
+        </details>
+        <details class="faq">
+          <summary>Comment suis-je livré&nbsp;?<span class="plus">+</span></summary>
+          <p class="answer">Le stock est <b>à La Réunion</b>, pas en métropole. GKG livre sur <b>plusieurs jours sur toute l'île</b> et gère vos commandes sur place : pas de container à attendre, pas de rupture de plusieurs semaines.</p>
         </details>
         <details class="faq">
           <summary>Qui s'occupe de la maintenance du four à La Réunion&nbsp;?<span class="plus">+</span></summary>
