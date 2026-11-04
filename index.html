@@ -9,7 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✏️</text></svg>">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Archivo:wght@400;500;600;700&family=Caveat:wght@500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=37a2d035">
+  <link rel="stylesheet" href="css/styles.css?v=94888a2e">
 </head>
 <body>
 <script>try{if(localStorage.getItem("gkg_theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
@@ -77,7 +77,7 @@
           <a class="btn btn-ink" href="#/contact" data-route>Demander une étude gratuite <span class="arrow">→</span></a>
           <a class="btn btn-ghost" href="#/pizzas" data-route>Voir la carte</a>
         </div>
-        <span class="hero-note reveal">audit + dégustation offerts, partout sur l'île ↴</span>
+        <span class="hero-note reveal"><svg class="hand-arrow ha-up" viewBox="0 0 30 40" aria-hidden="true"><path id="heroNoteArrow"/></svg>audit + dégustation offerts, partout sur l'île</span>
       </div>
       <div class="hero-plate">
         <div class="plate" id="heroPlate">
@@ -94,12 +94,12 @@
           <img src="assets/img/augusto-bien-plus-qu-une-pizza.png" alt="Augusto — bien plus qu'une pizza">
           <span>Produit officiel · France</span>
         </div>
-        <span class="plate-note" aria-hidden="true">servie en 2 minutes<svg viewBox="0 0 70 34"><path id="plateArrow" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="plate-note" aria-hidden="true">servie en 2 minutes<svg class="hand-arrow" viewBox="0 0 76 50"><path id="plateArrow"/></svg></span>
       </div>
       <div class="hero-stats reveal">
         <div class="hero-stat"><b>2 min</b><span>de cuisson, chrono</span></div>
         <div class="hero-stat"><b>0</b><span>pizzaïolo requis</span></div>
-        <div class="hero-stat"><b>18<em>mois</em></b><span>de conservation (DLC)</span></div>
+        <div class="hero-stat"><b>15<em>mois</em></b><span>de conservation (DLC)</span></div>
         <div class="hero-stat"><b>1<em>pizza/j</em></b><span>suffit à amortir le four</span></div>
       </div>
     </div>
@@ -140,19 +140,18 @@
   <div class="section livraison">
     <div class="wrap livr-grid">
       <div>
-        <p class="eyebrow">La solution clé en main</p>
-        <h2 class="title reveal">Un colis GKG,<br>et votre corner <span class="tomate">est prêt</span></h2>
-        <p class="lead reveal">La restauration n'est pas votre métier ? C'est justement pour vous. <strong>Chaque pièce du corner arrive avec le colis</strong> — il ne manque que votre comptoir.</p>
+        <p class="eyebrow">Ce que GKG apporte</p>
+        <h2 class="title reveal">On installe tout.<br>Vous n'apportez <span class="tomate">que le comptoir</span></h2>
+        <p class="lead reveal">La restauration n'est pas votre métier ? C'est justement pour vous. <strong>Le four, les pizzas, les boîtes, la PLV, la formation</strong> : tout arrive et tout est posé par nos équipes. Pas de matériel à acheter, pas de travaux à prévoir.</p>
         <div class="hero-ctas reveal">
           <a class="btn btn-ink" href="#/solution" data-route>Découvrir la solution <span class="arrow">→</span></a>
         </div>
       </div>
       <div class="drop-zone reveal" id="dropZone" aria-label="Tout ce qui est livré avec l'offre">
-        <span class="dz-label">Livré chez vous ↓</span>
-        <span class="stk s-ink">le four UNO</span>
+        <span class="dz-label">Installé chez vous ↓</span>
+        <span class="stk s-ink">le four Augusto</span>
         <span class="stk s-tomate">8 recettes artisanales</span>
         <span class="stk s-kraft">la formation</span>
-        <span class="stk s-out">le programme fidélité</span>
         <span class="stk s-kraft">les boîtes à pizza</span>
         <span class="stk s-ink">la PLV &amp; les menus</span>
         <span class="stk s-out">l'audit gratuit</span>
@@ -170,8 +169,8 @@
       <div>
         <p class="eyebrow">Le four en action</p>
         <h2 class="title reveal">Tout commence<br><span class="tomate">par le goût.</span></h2>
-        <p class="lead reveal">Le four UNO s'ouvre sur une pizza tout juste cuite. <strong>Deux minutes, pas un geste de plus</strong> — et votre client repart avec une pizza artisanale.</p>
-        <span class="tablet-note reveal">regardez, c'est filmé ↓</span>
+        <p class="lead reveal">Le four Augusto s'ouvre sur une pizza tout juste cuite. <strong>Deux minutes, pas un geste de plus</strong> — et votre client repart avec une pizza artisanale.</p>
+        <span class="tablet-note reveal">regardez, c'est filmé<svg class="hand-arrow ha-right" viewBox="0 0 70 34" aria-hidden="true"><path id="tabletArrow"/></svg></span>
       </div>
       <div class="tablet reveal" id="tablet">
         <span class="tape tablet-tape1" aria-hidden="true"></span>
@@ -179,7 +178,7 @@
         <div class="tablet-body">
           <span class="tablet-cam" aria-hidden="true"></span>
           <div class="tablet-screen">
-            <video class="tablet-video" id="tabletVideo" muted playsinline loop preload="metadata" poster="assets/video/four-augusto-poster.jpg" aria-label="Le four Augusto UNO s'ouvre sur une pizza tout juste cuite">
+            <video class="tablet-video" id="tabletVideo" muted playsinline loop preload="metadata" poster="assets/video/four-augusto-poster.jpg" aria-label="Le four Augusto s'ouvre sur une pizza tout juste cuite">
             <source src="assets/video/four-augusto.webm" type="video/webm">
             <source src="assets/video/four-augusto.mp4" type="video/mp4">
           </video>
@@ -428,7 +427,7 @@
         <span class="tape" aria-hidden="true"></span>
         <span class="tape t2" aria-hidden="true"></span>
         <img src="assets/img/pizza-artisanale-augusto-sur-pelle-en-inox-sorti.jpg" alt="Pizza artisanale Augusto sur pelle en inox, sortie du four">
-        <figcaption>tout juste sortie du four UNO —</figcaption>
+        <figcaption>tout juste sortie du four Augusto —</figcaption>
       </figure>
       <div>
         <p class="eyebrow">La fabrication</p>
@@ -465,12 +464,12 @@
       <figure class="kraft-frame reveal" id="fourVisual">
         <span class="tape" aria-hidden="true"></span>
         <span class="tape t2" aria-hidden="true"></span>
-        <img src="assets/img/four-professionnel-augusto-uno-installe-sur-un-c.jpg" alt="Four professionnel Augusto UNO installé sur un comptoir de bar">
-        <figcaption>le four UNO, posé sur votre comptoir —</figcaption>
+        <img src="assets/img/four-professionnel-augusto-uno-installe-sur-un-c.jpg" alt="Four professionnel Augusto installé sur un comptoir de bar">
+        <figcaption>le four Augusto, posé sur votre comptoir —</figcaption>
       </figure>
       <div>
         <p class="eyebrow">Le matériel</p>
-        <h2 class="title reveal">Le four UNO.<br>La technologie qui rend tout possible.</h2>
+        <h2 class="title reveal">Le four Augusto.<br>La technologie qui rend tout possible.</h2>
         <div class="specs reveal">
           <div class="spec"><span class="k">Install.</span><span class="v">Branchement 220&nbsp;V standard<small>Aucune extraction, aucun travaux d'aménagement</small></span></div>
           <div class="spec"><span class="k">Cuisson</span><span class="v">Moins de 2 minutes<small>Température et durée pilotées automatiquement</small></span></div>
@@ -495,7 +494,7 @@
         <div class="step reveal">
           <span class="s-no">2</span>
           <h3>Enfournez</h3>
-          <p>La pizza pré-assemblée glisse dans le four UNO.</p>
+          <p>La pizza pré-assemblée glisse dans le four Augusto.</p>
           <svg class="s-arrow" viewBox="0 0 34 22" aria-hidden="true"><path class="arrow-draw"/></svg>
         </div>
         <div class="step reveal">
@@ -554,8 +553,8 @@
           <div class="simu-point reveal">
             <span class="ico">c.</span>
             <div>
-              <h3>Programme de fidélité offert</h3>
-              <p>Entièrement financé par Augusto, pour faire revenir vos clients chez vous.</p>
+              <h3>Ni travaux, ni recrutement</h3>
+              <p>Un branchement 220&nbsp;V suffit, et personne à former au métier : aucune charge fixe en plus.</p>
             </div>
           </div>
           <div class="simu-point reveal">
@@ -829,7 +828,7 @@
       <div class="faq-list reveal">
         <details class="faq">
           <summary>Faut-il savoir faire des pizzas pour proposer Augusto&nbsp;?<span class="plus">+</span></summary>
-          <p class="answer">Non. Les pizzas arrivent <b>pré-assemblées et surgelées</b>. Le four UNO pilote la cuisson automatiquement. N'importe quel membre de votre équipe peut servir une pizza parfaite après une courte formation, incluse dans l'offre.</p>
+          <p class="answer">Non. Les pizzas arrivent <b>pré-assemblées et surgelées</b>. Le four Augusto pilote la cuisson automatiquement. N'importe quel membre de votre équipe peut servir une pizza parfaite après une courte formation, incluse dans l'offre.</p>
         </details>
         <details class="faq">
           <summary>Quels travaux faut-il prévoir dans mon établissement&nbsp;?<span class="plus">+</span></summary>
@@ -960,6 +959,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="js/app.js?v=27270405"></script>
+<script src="js/app.js?v=2b3be9ca"></script>
 </body>
 </html>

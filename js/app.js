@@ -62,7 +62,11 @@
   var cueArrow = document.getElementById("cueArrow");
   if (cueArrow) cueArrow.setAttribute("d", smoothPath(linePts(11, 2, 11, 28, 6, rnd(14), 2.5), false) + " M4 22 L11 31 L18 22");
   var plateArrow = document.getElementById("plateArrow");
-  if (plateArrow) plateArrow.setAttribute("d", smoothPath(linePts(6, 4, 58, 22, 6, rnd(15), 5), false) + " M48 24 L60 23 L52 13");
+  if (plateArrow) plateArrow.setAttribute("d", smoothPath(linePts(6, 46, 64, 9, 6, rnd(15), 5), false) + " M51 9 L67 6 L60 21");
+  var heroNoteArrow = document.getElementById("heroNoteArrow");
+  if (heroNoteArrow) heroNoteArrow.setAttribute("d", smoothPath(linePts(24, 37, 7, 5, 6, rnd(31), 3), false) + " M1 15 L6 2 L16 9");
+  var tabletArrow = document.getElementById("tabletArrow");
+  if (tabletArrow) tabletArrow.setAttribute("d", smoothPath(linePts(3, 20, 60, 13, 6, rnd(44), 4), false) + " M50 5 L64 12 L50 21");
   document.querySelectorAll(".s-arrow .arrow-draw").forEach(function(p, i){
     p.setAttribute("d", smoothPath(linePts(2, 11, 26, 11, 5, rnd(16 + i), 3), false) + " M20 4 L29 11 L20 18");
   });
