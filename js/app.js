@@ -186,32 +186,98 @@
     if (replayBtn) replayBtn.addEventListener("click", function(){ video.currentTime = 0; tryPlay(); });
   }
   /* ---------- simulateur ---------- */
-  var rp = document.getElementById("rangePizzas");
-  var rx = document.getElementById("rangePrix");
-  function setFill(el){ el.style.setProperty("--fill", ((+el.value - +el.min) / (+el.max - +el.min) * 100) + "%"); }
-  var caM = document.getElementById("caMois"), caA = document.getElementById("caAn");
-  var caCur = { m: 5400, a: 64800 };
-  var caFirst = true;
-  function renderCa(){
-    caM.textContent = Math.round(caCur.m).toLocaleString("fr-FR") + " €";
-    caA.textContent = Math.round(caCur.a).toLocaleString("fr-FR") + " €";
-  }
-  function calc(){
-    var p = +rp.value, prix = +rx.value;
-    document.getElementById("outPizzas").textContent = p;
-    document.getElementById("outPrix").textContent = prix.toLocaleString("fr-FR", {minimumFractionDigits: 2}) + " €";
-    var mois = p * prix * 30;
-    if (animOn && !caFirst) {
-      /* les euros défilent : chiffres qui roulent + petit pop */
-      gsap.to(caCur, { m: mois, a: mois * 12, duration: .55, ease: "power2.out", onUpdate: renderCa, overwrite: true });
-      gsap.fromTo([caM, caA], { scale: 1.06 }, { scale: 1, duration: .45, ease: "power2.out", transformOrigin: "left bottom", overwrite: "auto" });
-    } else {
-      caCur.m = mois; caCur.a = mois * 12; renderCa();
-    }
-    caFirst = false;
-    setFill(rp); setFill(rx);
-  }
-  if (rp && rx) { rp.addEventListener("input", calc); rx.addEventListener("input", calc); calc(); }
+  /* ---------- avis Google ---------- */
+  (function(){
+    var sec = document.getElementById("avisGoogle");
+    if (!sec) return;
+    var place = (sec.getAttribute("data-place-id") || "").trim();
+    if (!place) return;                       // pas encore de fiche : on garde l'invitation seule
+    var lien = document.getElementById("avisLien");
+    if (lien) lien.href = "https://search.google.com/local/writereview?placeid=" + encodeURIComponent(place);
+  })();
+
+  /* ---------- demande d'estimation ---------- */
+  (function(){
+    var form = document.getElementById("simForm");
+    if (!form) return;
+    var API_SIM = "https://julienvantura.alwaysdata.net/bat/simulateur.php";
+    var VOLUMES = {
+      "Hôtel": "Combien de chambres ?",
+      "Camping": "Quelle fréquentation par an ?",
+      "Club de sport": "Combien d'adhérents ou de passages par mois ?",
+      "Espace de coworking": "Combien de passages par mois ?"
+    };
+    var val = function(id){ var e = document.getElementById(id); return e ? (e.value || "").trim() : ""; };
+    var err = function(msg, cible){
+      var e = document.getElementById("sErr");
+      if (msg) { e.textContent = msg; e.classList.add("on"); } else { e.classList.remove("on"); }
+      if (cible) { var c = document.getElementById(cible); if (c && c.focus) c.focus(); }
+    };
+    var etape = function(n){
+      form.querySelectorAll(".sim-etape").forEach(function(s){ s.hidden = s.getAttribute("data-etape") !== String(n); });
+      err(null);
+    };
+
+    var act = document.getElementById("sActivite");
+    act.addEventListener("change", function(){
+      document.getElementById("sVolumeLab").textContent = VOLUMES[act.value] || "Combien de clients par mois ?";
+      document.getElementById("sTauxBloc").hidden = !(act.value === "Hôtel" || act.value === "Camping");
+      err(null);
+    });
+    var taux = document.getElementById("sTaux"), tauxOut = document.getElementById("sTauxOut");
+    taux.addEventListener("input", function(){ tauxOut.textContent = taux.value + " %"; });
+
+    var resto = "non";
+    form.querySelectorAll(".sim-oui").forEach(function(b){
+      b.addEventListener("click", function(){
+        form.querySelectorAll(".sim-oui").forEach(function(o){ o.setAttribute("aria-pressed", "false"); });
+        b.setAttribute("aria-pressed", "true");
+        resto = b.getAttribute("data-resto");
+        document.getElementById("sRepasBloc").hidden = resto !== "oui";
+      });
+    });
+
+    document.getElementById("sSuite").addEventListener("click", function(){
+      if (!act.value) return err("dites-nous d'abord votre activité —", "sActivite");
+      if (!(parseInt(val("sVolume"), 10) > 0)) return err("il nous manque votre volume d'activité —", "sVolume");
+      etape(2);
+    });
+    document.getElementById("sRetour").addEventListener("click", function(){ etape(1); });
+
+    var envoi = document.getElementById("sEnvoi");
+    envoi.addEventListener("click", function(){
+      if (val("sNom") === "") return err("votre nom, s'il vous plaît —", "sNom");
+      if (val("sSociete") === "") return err("le nom de votre établissement —", "sSociete");
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(val("sMail"))) return err("un courriel valide, pour vous envoyer l'estimation —", "sMail");
+      if (val("sTel") === "") return err("un téléphone, au cas où —", "sTel");
+      if (!document.getElementById("sRgpd").checked) return err("il nous faut votre accord pour vous recontacter —", "sRgpd");
+      err(null);
+      var etiquette = envoi.innerHTML;
+      envoi.setAttribute("data-busy", "1"); envoi.textContent = "Envoi en cours…";
+      var fini = function(){ envoi.removeAttribute("data-busy"); envoi.innerHTML = etiquette; };
+      var fd = new FormData();
+      fd.append("activite", act.value);
+      fd.append("volume", val("sVolume"));
+      fd.append("taux", taux.value);
+      fd.append("restauration", resto);
+      fd.append("repas", resto === "oui" ? (val("sRepas") || "0") : "0");
+      fd.append("societe", val("sSociete"));
+      fd.append("nom", val("sNom"));
+      fd.append("prenom", val("sPrenom"));
+      fd.append("courriel", val("sMail"));
+      fd.append("telephone", val("sTel"));
+      fd.append("commune", val("sCommune"));
+      fd.append("piege", val("sPiege"));
+      fetch(API_SIM, { method: "POST", body: fd })
+        .then(function(r){ return r.json().catch(function(){ return { ok:false, erreur:"réponse inattendue du serveur" }; }); })
+        .then(function(rep){
+          fini();
+          if (rep && rep.ok) { document.getElementById("sRef").textContent = rep.ref || ""; etape(3); }
+          else err((rep && rep.erreur ? rep.erreur : "l'envoi a échoué") + " — appelez-nous, c'est plus rapide —");
+        })
+        .catch(function(){ fini(); err("l'envoi a échoué, vérifiez votre connexion —"); });
+    });
+  })();
 
 
   /* ---------- polaroids : clic = retournement ---------- */

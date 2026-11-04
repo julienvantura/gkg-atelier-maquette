@@ -966,3 +966,69 @@
     border-left:3px solid var(--tomate);padding-left:20px;
   }
   .rse-aveu b{color:var(--ink);font-weight:700}
+
+  /* ---------- formulaire d'estimation ---------- */
+  .sim-intro{margin-top:10px;font-size:14px;color:var(--soft);line-height:1.6}
+  .sim-rang{
+    display:block;margin:24px 0 18px;font-family:var(--font-mono);font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--tomate);
+  }
+  .sim-lab{
+    display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    margin:18px 0 8px;font-size:13.5px;color:var(--soft);
+  }
+  .sim-lab output{font-family:var(--font-mono);font-size:14px;color:var(--ink);font-weight:500}
+  .sim-in{
+    width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--line);
+    padding:9px 2px;font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--ink);
+  }
+  select.sim-in{appearance:none;cursor:pointer;padding-right:22px}
+  .sim-in::placeholder{color:var(--soft);font-weight:400}
+  .sim-in:focus{outline:none;border-bottom-color:var(--tomate)}
+  .sim-duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+  .sim-choix{display:flex;gap:10px;margin-top:4px}
+  .sim-choix button{
+    flex:1;padding:11px 10px;background:var(--card);border:1.5px solid var(--line);cursor:pointer;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);
+    transition:border-color .25s,color .25s;
+  }
+  .sim-choix button:hover{border-color:var(--soft);color:var(--ink)}
+  .sim-choix button[aria-pressed="true"]{border-color:var(--tomate);border-width:2px;color:var(--tomate)}
+  .sim-rgpd{display:flex;gap:10px;align-items:flex-start;margin-top:22px;font-size:12.5px;color:var(--soft);line-height:1.55;cursor:pointer}
+  .sim-rgpd input{margin-top:2px;accent-color:var(--tomate);width:16px;height:16px;flex:none}
+  .sim-piege{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .sim-suite{margin-top:28px}
+  .sim-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;align-items:center}
+  .sim-err{
+    margin-top:16px;font-family:var(--font-hand);font-size:19px;color:var(--tomate);
+    display:none;transform:rotate(-1deg);
+  }
+  .sim-err.on{display:block}
+  .sim-merci{margin-top:6px;font-size:16px;color:var(--ink);line-height:1.7}
+  .sim-merci b{color:var(--tomate)}
+  .sim-merci2{margin:26px 0 12px;font-family:var(--font-hand);font-size:21px;color:var(--pencil)}
+  .sim-ref{margin-top:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;color:var(--soft)}
+  .sim-ref b{color:var(--ink)}
+  @media(max-width:520px){.sim-duo{grid-template-columns:1fr}}
+
+  /* ---------- avis Google ---------- */
+  .avis{background:var(--paper-2)}
+  .avis-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
+  .avis-note{
+    font-family:var(--font-hand);font-size:clamp(18px,2vw,23px);color:var(--pencil);
+    transform:rotate(-1.5deg);display:inline-block;margin-top:22px;
+  }
+  .avis-carte{
+    position:relative;background:var(--card);border:1px solid var(--edge);
+    box-shadow:5px 7px 0 var(--shadow);padding:34px 30px 36px;transform:rotate(-.8deg);text-align:center;
+  }
+  .avis-carte .tape{top:-13px;left:50%;margin-left:-48px;transform:rotate(3deg)}
+  .avis-etoiles{display:flex;justify-content:center;gap:7px;margin-bottom:18px}
+  .av-star{width:27px;height:27px;fill:none;stroke:var(--tomate);stroke-width:1.6;stroke-linejoin:round}
+  .avis-vide{font-size:15px;color:var(--soft);line-height:1.8}
+  .avis-vide b{color:var(--ink);font-weight:700}
+  .avis-liste{display:flex;flex-direction:column;gap:16px;text-align:left}
+  .avis-item{border-top:1px solid var(--line);padding-top:14px}
+  .avis-item .av-qui{font-family:var(--font-display);font-weight:700;font-size:14px}
+  .avis-item .av-txt{font-size:14px;color:var(--soft);line-height:1.6;margin-top:4px}
+  @media(max-width:860px){.avis-grid{grid-template-columns:1fr}}
