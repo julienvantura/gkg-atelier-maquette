@@ -1067,3 +1067,9 @@
   .bc-champ-large{grid-column:1 / -1}
   .bc-help-sous{margin-top:8px;margin-bottom:2px;font-size:10.5px}
   @media(max-width:520px){.bc-champ-large{grid-column:auto}}
+  .hors-cadre{
+    margin:26px 0 0;padding:14px 18px;border:1.5px dashed var(--tomate);
+    font-family:var(--font-mono);font-size:11.5px;line-height:1.7;color:var(--soft);
+  }
+  .hors-cadre a{color:var(--tomate);font-weight:500}
+  #simForm .hors-cadre{margin:18px 0 0}

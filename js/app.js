@@ -186,6 +186,20 @@
     if (replayBtn) replayBtn.addEventListener("click", function(){ video.currentTime = 0; tryPlay(); });
   }
   /* ---------- simulateur ---------- */
+  /* ---------- aperçu intégré (iframe, artifact) ---------- */
+  var EN_LIGNE = "https://julienvantura.github.io/gkg-atelier-maquette/";
+  var DANS_CADRE = (function(){ try { return window.top !== window.self; } catch (e) { return true; } })();
+  function noteApercu(hote, quoi){
+    if (!DANS_CADRE || !hote) return;
+    var p = document.createElement("p");
+    p.className = "hors-cadre";
+    p.innerHTML = quoi + " dans cet aperçu intégré. "
+      + "<a href=\"" + EN_LIGNE + "\" target=\"_blank\" rel=\"noopener\">Ouvrir la maquette en pleine page</a> pour la chaîne complète.";
+    hote.parentNode.insertBefore(p, hote);
+  }
+  noteApercu(document.querySelector(".bache-actions"), "Le téléchargement et l\u2019envoi du bon à tirer sont bloqués");
+  noteApercu(document.querySelector("#simForm .sim-etape"), "L\u2019envoi de la demande est bloqué");
+
   /* ---------- avis Google ---------- */
   (function(){
     var sec = document.getElementById("avisGoogle");
@@ -277,7 +291,8 @@
           if (rep && rep.ok) { document.getElementById("sRef").textContent = rep.ref || ""; etape(3); }
           else err((rep && rep.erreur ? rep.erreur : "l'envoi a échoué") + " — appelez-nous, c'est plus rapide —");
         })
-        .catch(function(){ fini(); err("l'envoi a échoué, vérifiez votre connexion —"); });
+        .catch(function(){ fini(); err(DANS_CADRE ? "aperçu intégré : ouvrez la maquette en pleine page pour envoyer —"
+                                                      : "l'envoi a échoué, vérifiez votre connexion —"); });
     });
   })();
 
@@ -978,7 +993,8 @@
           })
           .catch(function(){
             fini();
-            erreur("l'envoi a échoué, vérifiez votre connexion — vous pouvez enregistrer le PDF et nous l'adresser —");
+            erreur(DANS_CADRE ? "aperçu intégré : ouvrez la maquette en pleine page pour envoyer —"
+                              : "l'envoi a échoué, vérifiez votre connexion — vous pouvez enregistrer le PDF et nous l'adresser —");
           });
       });
     });
