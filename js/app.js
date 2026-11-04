@@ -197,10 +197,12 @@
   })();
 
   /* ---------- demande d'estimation ---------- */
+  var API_SIM = "https://julienvantura.alwaysdata.net/bat/simulateur.php";
+  /* une visite suffit à faire avancer la file des estimations, si la tâche planifiée est à l'arrêt */
+  setTimeout(function(){ try { fetch(API_SIM + "?tick=1", { mode:"cors", keepalive:true }).catch(function(){}); } catch (e) {} }, 5000);
   (function(){
     var form = document.getElementById("simForm");
     if (!form) return;
-    var API_SIM = "https://julienvantura.alwaysdata.net/bat/simulateur.php";
     var VOLUMES = {
       "Hôtel": "Combien de chambres ?",
       "Camping": "Quelle fréquentation par an ?",
