@@ -500,13 +500,17 @@
       return s;
     }
 
-    function dessine(){
+    function dessine(apres){
       var th = THEMES[etat.bg], fo = FONTS[etat.font];
       var aGauche = etat.side === "left";
       var besoin = ["assets/img/augusto-bien-plus-qu-une-pizza.png"];
       if (etat.img) besoin.push("assets/img/" + etat.img);
       var reste = besoin.length;
-      besoin.forEach(function(s){ img(s, function(){ if (--reste === 0) peint(th, fo, aGauche); }); });
+      besoin.forEach(function(s){ img(s, function(){
+        if (--reste > 0) return;
+        peint(th, fo, aGauche);
+        if (apres) apres();
+      }); });
     }
 
     function peint(th, fo, aGauche){
@@ -581,7 +585,9 @@
     function planifie(){
       if (prevu) return;
       prevu = true;
-      requestAnimationFrame(function(){ prevu = false; dessine(); });
+      var vasy = function(){ if (!prevu) return; prevu = false; dessine(); };
+      requestAnimationFrame(vasy);
+      setTimeout(vasy, 140);   // filet : en arrière-plan le rAF peut ne jamais venir
     }
 
     function lie(id, cle){
@@ -716,6 +722,12 @@
       erreur(null);
       chargeJsPDF(function(JsPDF){
         if (!JsPDF) { erreur("le générateur de PDF n'a pas pu se charger — vérifiez votre connexion"); cb(null); return; }
+        dessine(function(){ batAvecJsPDF(JsPDF, cb); });
+      });
+    }
+
+    function batAvecJsPDF(JsPDF, cb){
+      {
 
         var doc = new JsPDF({ unit:"mm", format:"a4", compress:true });
         var LG = 210, MG = 16, COL = LG - 2 * MG;
@@ -835,15 +847,18 @@
 
         doc.setProperties({ title:"Bon à tirer " + REF + " — " + v("bEtab"), subject:"Bâche publicitaire Augusto × GKG", author:"GKG" });
         cb(doc);
-      });
+      }
     }
 
     function nomFichier(){
       return REF + (v("bEtab") ? "-" + slug(v("bEtab")) : "") + ".pdf";
     }
-    function confirme(){
+    function confirme(envoye){
       var ok = document.getElementById("bacheOk"), r = document.getElementById("bacheRef");
+      var m1 = document.getElementById("bacheMsg"), m2 = document.getElementById("bacheMsg2");
       if (r) r.textContent = REF;
+      if (m1) m1.textContent = envoye ? "bon à tirer" : "bon à tirer";
+      if (m2) m2.textContent = envoye ? "envoyé à GKG ✓ réponse sous 24 h ouvrées" : "enregistré ✓";
       if (ok) ok.classList.add("on");
     }
 
@@ -854,31 +869,47 @@
         occupe(bPdf, false);
         if (!doc) return;
         doc.save(nomFichier());
-        confirme();
+        confirme(false);
       });
     });
 
+    var API_BAT = "https://julienvantura.alwaysdata.net/bat/";
     var send = document.getElementById("bSend");
     if (send) send.addEventListener("click", function(){
-      occupe(send, true);
+      var etiquette = send.innerHTML;
+      occupe(send, true); send.textContent = "Envoi en cours…";
+      var fini = function(){ occupe(send, false); send.innerHTML = etiquette; };
       construitBat(function(doc){
-        occupe(send, false);
-        if (!doc) return;
-        doc.save(nomFichier());
-        confirme();
-        var corps = "Bonjour,\n\nVoici mon bon à tirer signé pour la bâche.\n\n"
-          + "Référence : " + REF + "\n"
-          + "Établissement : " + v("bEtab") + "\n"
-          + "Signataire : " + v("bSig") + (v("bFonc") ? " (" + v("bFonc") + ")" : "") + "\n"
-          + "Téléphone : " + (v("bTel") || "—") + "\n"
-          + "Commune : " + (v("bVille") || "—") + "\n"
-          + "Quantité : " + (v("bQte") || "1") + "\n\n"
-          + "Le PDF « " + nomFichier() + " » vient d'être enregistré sur mon appareil, je le joins à ce message.\n";
-        setTimeout(function(){
-          window.location.href = "mailto:contact@gkg-distribution.com?subject="
-            + encodeURIComponent("Bon à tirer " + REF + " — " + v("bEtab"))
-            + "&body=" + encodeURIComponent(corps);
-        }, 700);
+        if (!doc) { fini(); return; }
+        var NOMS_MEP = { left:"Texte à gauche, visuel à droite", right:"Texte à droite, visuel à gauche" };
+        var fd = new FormData();
+        fd.append("fichier", doc.output("blob"), nomFichier());
+        fd.append("ref", REF);
+        fd.append("etablissement", v("bEtab"));
+        fd.append("signataire", v("bSig"));
+        fd.append("fonction", v("bFonc"));
+        fd.append("commune", v("bVille"));
+        fd.append("telephone", v("bTel"));
+        fd.append("courriel", v("bMail"));
+        fd.append("quantite", v("bQte") || "1");
+        fd.append("ligne1", etat.t1);
+        fd.append("ligne2", etat.t2);
+        fd.append("police", NOMS_POL[etat.font]);
+        fd.append("fond", NOMS_FOND[etat.bg]);
+        fd.append("visuel", nomPizza());
+        fd.append("mise_en_page", NOMS_MEP[etat.side]);
+        fd.append("piege", v("bPiege"));
+        fetch(API_BAT, { method:"POST", body: fd })
+          .then(function(r){ return r.json().catch(function(){ return { ok:false, erreur:"réponse inattendue du serveur" }; }); })
+          .then(function(rep){
+            fini();
+            if (rep && rep.ok) { erreur(null); confirme(true); }
+            else { erreur((rep && rep.erreur ? rep.erreur : "l'envoi a échoué") + " — enregistrez le PDF et écrivez-nous —"); }
+          })
+          .catch(function(){
+            fini();
+            erreur("l'envoi a échoué, vérifiez votre connexion — vous pouvez enregistrer le PDF et nous l'adresser —");
+          });
       });
     });
 
