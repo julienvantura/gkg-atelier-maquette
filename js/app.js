@@ -764,7 +764,7 @@
 
     function manquants(){
       var m = [];
-      if (!v("bEtab")) m.push("le nom de votre établissement");
+      if (!v("bSoc")) m.push("le nom de votre établissement");
       if (!v("bSig")) m.push("le nom du signataire");
       if (!v("bTel") && !v("bMail")) m.push("un téléphone ou un courriel");
       if (!aSigne) m.push("votre signature");
@@ -783,7 +783,7 @@
       var m = manquants();
       if (m.length) {
         erreur("il manque " + m.join(", ") + " —");
-        var cible = !v("bEtab") ? "bEtab" : !v("bSig") ? "bSig" : (!v("bTel") && !v("bMail")) ? "bTel" : "bSignPad";
+        var cible = !v("bSoc") ? "bSoc" : !v("bSig") ? "bSig" : (!v("bTel") && !v("bMail")) ? "bTel" : "bSignPad";
         var el = document.getElementById(cible);
         if (el && el.scrollIntoView) el.scrollIntoView({ behavior:"smooth", block:"center" });
         if (el && el.focus && cible !== "bSignPad") setTimeout(function(){ el.focus(); }, 500);
@@ -832,7 +832,7 @@
         doc.setFontSize(9);
         var gauche = ["GKG", "Distributeur exclusif Augusto à La Réunion", "La Saline-les-Bains", "+262 692 027 061", "contact@gkg-distribution.com"];
         var qualite = v("bFonc") ? v("bSig") + ", " + v("bFonc") : v("bSig");
-        var droite = [v("bEtab"), qualite, v("bVille") || "—", v("bTel") || "—", v("bMail") || "—"];
+        var droite = [v("bSoc"), qualite, v("bVille") || "—", v("bTel") || "—", v("bMail") || "—"];
         for (var i = 0; i < 5; i++) {
           doc.setFont("helvetica", i === 0 ? "bold" : "normal");
           col(i === 0 ? ENCRE : GRIS);
@@ -891,7 +891,7 @@
         section("Bon pour accord", y);
         y += 5.4;
         var para = "Je soussigné(e) " + v("bSig") + (v("bFonc") ? ", agissant en qualité de " + v("bFonc") : "")
-                 + " pour l'établissement " + v("bEtab") + ", déclare avoir vérifié le présent bon à tirer "
+                 + " pour l'établissement " + v("bSoc") + ", déclare avoir vérifié le présent bon à tirer "
                  + "(textes, orthographe, visuel, format et quantité) et en autorise l'impression. "
                  + "Toute erreur non signalée à ce stade ne pourra être imputée à GKG.";
         doc.setFont("helvetica", "normal"); doc.setFontSize(8.4); col(ENCRE);
@@ -915,13 +915,13 @@
         doc.text("GKG, distributeur exclusif Augusto à La Réunion · contact@gkg-distribution.com · +262 692 027 061", MG, 288);
         doc.text(REF + " · page 1/1", LG - MG, 288, { align:"right" });
 
-        doc.setProperties({ title:"Bon à tirer " + REF + " — " + v("bEtab"), subject:"Bâche publicitaire Augusto × GKG", author:"GKG" });
+        doc.setProperties({ title:"Bon à tirer " + REF + " — " + v("bSoc"), subject:"Bâche publicitaire Augusto × GKG", author:"GKG" });
         cb(doc);
       }
     }
 
     function nomFichier(){
-      return REF + (v("bEtab") ? "-" + slug(v("bEtab")) : "") + ".pdf";
+      return REF + (v("bSoc") ? "-" + slug(v("bSoc")) : "") + ".pdf";
     }
     function confirme(envoye){
       var ok = document.getElementById("bacheOk"), r = document.getElementById("bacheRef");
@@ -955,7 +955,7 @@
         var fd = new FormData();
         fd.append("fichier", doc.output("blob"), nomFichier());
         fd.append("ref", REF);
-        fd.append("etablissement", v("bEtab"));
+        fd.append("etablissement", v("bSoc"));
         fd.append("signataire", v("bSig"));
         fd.append("fonction", v("bFonc"));
         fd.append("commune", v("bVille"));
@@ -988,7 +988,7 @@
       cv.toBlob(function(b){
         if (!b) return;
         var u = URL.createObjectURL(b), a = document.createElement("a");
-        a.href = u; a.download = "visuel-bache-" + (slug(v("bEtab")) || "gkg") + ".png";
+        a.href = u; a.download = "visuel-bache-" + (slug(v("bSoc")) || slug(v("bEtab")) || "gkg") + ".png";
         document.body.appendChild(a); a.click(); a.remove();
         setTimeout(function(){ URL.revokeObjectURL(u); }, 5000);
       }, "image/png");

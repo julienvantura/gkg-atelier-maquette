@@ -1032,3 +1032,6 @@
   .avis-item .av-qui{font-family:var(--font-display);font-weight:700;font-size:14px}
   .avis-item .av-txt{font-size:14px;color:var(--soft);line-height:1.6;margin-top:4px}
   @media(max-width:860px){.avis-grid{grid-template-columns:1fr}}
+  .bc-champ-large{grid-column:1 / -1}
+  .bc-help-sous{margin-top:8px;margin-bottom:2px;font-size:10.5px}
+  @media(max-width:520px){.bc-champ-large{grid-column:auto}}
