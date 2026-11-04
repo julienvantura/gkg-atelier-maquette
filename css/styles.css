@@ -549,12 +549,52 @@
   .phase li{color:var(--soft);font-size:14.5px;padding-left:24px;position:relative}
   .phase li::before{content:"✓";position:absolute;left:0;color:var(--basilic);font-weight:700;font-size:16px}
   .phase li b{color:var(--ink);font-weight:700}
-  .timeline-strip{margin-top:44px;border:2px solid var(--ink);border-radius:999px;display:flex;overflow:hidden;background:var(--card)}
-  .tl-cell{flex:1;padding:18px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
-  .tl-cell:last-child{border-right:none;background:rgba(192,57,42,.08)}
-  .tl-cell b{font-family:var(--font-display);font-weight:800;font-size:20px}
-  .tl-cell span{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
-  @media(max-width:940px){.phases{grid-template-columns:1fr}.timeline-strip{flex-direction:column;border-radius:24px}.tl-cell{border-right:none;border-bottom:1px solid var(--line)}.tl-cell:last-child{border-bottom:none}}
+  @media(max-width:940px){.phases{grid-template-columns:1fr}}
+
+  /* ---------- calendrier en 5 étapes ---------- */
+  .cal{background:var(--paper-2)}
+  .tline{
+    --tl-gap:clamp(10px,1.8vw,24px);--tl-dot:48px;
+    list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--tl-gap);
+    margin-top:clamp(40px,5vw,58px);
+  }
+  .tl-step{position:relative;display:flex;flex-direction:column;align-items:flex-start}
+  .tl-step:not(:last-child)::after{
+    content:"";position:absolute;top:calc(var(--tl-dot) / 2 - 1px);left:calc(var(--tl-dot) + 10px);
+    width:calc(100% - var(--tl-dot) - 10px + var(--tl-gap));border-top:2px dashed var(--pencil);opacity:.45;
+  }
+  .tl-no{
+    width:var(--tl-dot);height:var(--tl-dot);border-radius:50%;border:2px solid var(--ink);background:var(--paper-2);
+    display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:21px;
+    color:var(--tomate);box-shadow:3px 4px 0 var(--shadow);position:relative;z-index:1;
+  }
+  .tl-step:last-child .tl-no{background:var(--tomate);border-color:var(--tomate);color:var(--on-tomate)}
+  .tl-when{
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--tomate);margin-top:18px;
+  }
+  .tl-step h3{font-family:var(--font-display);font-weight:800;font-size:clamp(16px,1.5vw,19px);margin:8px 0 8px;letter-spacing:-.01em}
+  .tl-step p{color:var(--soft);font-size:14.5px;line-height:1.55}
+  .tl-foot{
+    font-family:var(--font-hand);font-size:clamp(20px,2.3vw,27px);color:var(--pencil);
+    transform:rotate(-1.5deg);display:inline-block;margin-top:clamp(34px,4vw,48px);
+  }
+  .tl-foot em{font-style:normal;color:var(--tomate)}
+  @media(max-width:940px){
+    .tline{grid-template-columns:1fr 1fr;row-gap:34px}
+    .tl-step:nth-child(2n)::after{display:none}
+  }
+  @media(max-width:620px){
+    .tline{grid-template-columns:1fr;gap:0}
+    .tl-step{display:grid;grid-template-columns:auto 1fr;column-gap:18px;padding-bottom:30px;align-items:start}
+    .tl-step .tl-no{grid-row:1 / span 3}
+    .tl-step .tl-when{margin-top:4px}
+    .tl-step:nth-child(2n)::after{display:block}
+    .tl-step:not(:last-child)::after{
+      top:calc(var(--tl-dot) + 8px);left:calc(var(--tl-dot) / 2 - 1px);width:0;height:calc(100% - var(--tl-dot) - 8px);
+      border-top:none;border-left:2px dashed var(--pencil);
+    }
+  }
 
   /* ---------- duo / marché / refs / engagements ---------- */
   .duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,26px);margin-top:56px}
