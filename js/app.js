@@ -94,15 +94,15 @@
     try { saved = localStorage.getItem(KEY); } catch (e) {}
     function apply(t){
       var nav = document.querySelector(".nav");
-      if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      if (t === "light") document.documentElement.setAttribute("data-theme", "light");
       else document.documentElement.removeAttribute("data-theme");
-      document.querySelectorAll("[data-theme-toggle]").forEach(function(b){ b.setAttribute("aria-pressed", String(t === "dark")); });
+      document.querySelectorAll("[data-theme-toggle]").forEach(function(b){ b.setAttribute("aria-pressed", String(t === "light")); });
       if (nav) { nav.style.display = "none"; void nav.offsetHeight; nav.style.display = ""; }
     }
-    apply(saved === "dark" ? "dark" : "light");
+    apply(saved === "light" ? "light" : "dark");
     document.querySelectorAll("[data-theme-toggle]").forEach(function(btn){
       btn.addEventListener("click", function(){
-        var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        var next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
         apply(next);
         try { localStorage.setItem(KEY, next); } catch (e) {}
       });
@@ -239,11 +239,11 @@
   };
   var titles = {
     home: "La Recette GKG",
-    pizzas: "La carte — GKG Distribution",
-    solution: "La solution — GKG Distribution",
-    gkg: "Pourquoi GKG — GKG Distribution",
-    contact: "Contact — GKG Distribution",
-    legal: "Mentions légales — GKG Distribution"
+    pizzas: "La carte — GKG",
+    solution: "La solution — GKG",
+    gkg: "Pourquoi GKG — GKG",
+    contact: "Contact — GKG",
+    legal: "Mentions légales — GKG"
   };
   var current = null;
 
