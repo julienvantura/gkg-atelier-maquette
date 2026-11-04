@@ -404,7 +404,7 @@
     var tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: introDelayOnce() });
     tl.fromTo("#page-home .hline-in", { yPercent: 112 }, { yPercent: 0, duration: .95, stagger: .14, ease: "power4.out" }, .1)
       .fromTo("#page-home .hero-plate", { y: 60, opacity: 0, rotation: 6 }, { y: 0, opacity: 1, rotation: 0, duration: 1.1, ease: "back.out(1.4)", clearProps: "rotation" }, .3);
-    /* coup de stabilo vert fluo sur "tous" */
+    /* coup de stabilo sur "tous" */
     if (hlStroke) {
       var hlen = hlStroke.getTotalLength();
       gsap.fromTo(hlStroke, { strokeDasharray: hlen, strokeDashoffset: hlen }, { strokeDashoffset: 0, duration: .5, ease: "power2.inOut", delay: 1.05 + tl.delay() });
