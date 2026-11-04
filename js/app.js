@@ -607,46 +607,290 @@
     groupe(".bc-side", "data-side", "side");
     groupe(".bc-piz", "data-img", "img");
 
+    /* ---------- signature ---------- */
+    var sp = document.getElementById("bSignPad");
+    var aSigne = false, sctx = null;
+    if (sp) {
+      sctx = sp.getContext("2d");
+      sctx.lineWidth = 4.5; sctx.lineCap = "round"; sctx.lineJoin = "round"; sctx.strokeStyle = "#1B1A16";
+      var trace = false, px = 0, py = 0;
+      var pos = function(e){
+        var r = sp.getBoundingClientRect();
+        return [(e.clientX - r.left) * sp.width / r.width, (e.clientY - r.top) * sp.height / r.height];
+      };
+      sp.addEventListener("pointerdown", function(e){
+        e.preventDefault(); trace = true;
+        try { sp.setPointerCapture(e.pointerId); } catch (err) {}
+        var p = pos(e); px = p[0]; py = p[1];
+        sctx.beginPath(); sctx.moveTo(px, py); sctx.lineTo(px + .2, py + .2); sctx.stroke();
+        if (!aSigne) { aSigne = true; sp.parentNode.classList.add("signe"); }
+      });
+      sp.addEventListener("pointermove", function(e){
+        if (!trace) return;
+        var p = pos(e);
+        sctx.beginPath(); sctx.moveTo(px, py); sctx.lineTo(p[0], p[1]); sctx.stroke();
+        px = p[0]; py = p[1];
+      });
+      ["pointerup", "pointercancel", "pointerleave"].forEach(function(t){
+        sp.addEventListener(t, function(){ trace = false; });
+      });
+      var efface = document.getElementById("bSignClear");
+      if (efface) efface.addEventListener("click", function(){
+        sctx.clearRect(0, 0, sp.width, sp.height);
+        aSigne = false; sp.parentNode.classList.remove("signe");
+      });
+    }
+
+    /* ---------- bon à tirer ---------- */
+    function ch2(n){ return (n < 10 ? "0" : "") + n; }
+    var d0 = new Date();
+    var REF = "BAT-" + d0.getFullYear() + ch2(d0.getMonth() + 1) + ch2(d0.getDate()) + "-"
+            + ("000" + Math.floor(Math.random() * 65535).toString(16).toUpperCase()).slice(-4);
+    var DATE_FR = ch2(d0.getDate()) + "/" + ch2(d0.getMonth() + 1) + "/" + d0.getFullYear();
+
+    function v(id){ var e = document.getElementById(id); return e ? (e.value || "").trim() : ""; }
+    function erreur(msg){
+      var e = document.getElementById("bacheErr");
+      if (!e) return;
+      if (msg) { e.textContent = msg; e.classList.add("on"); } else { e.classList.remove("on"); }
+    }
+    function occupe(btn, on){
+      if (btn) btn.setAttribute("data-busy", on ? "1" : "0");
+    }
+    function slug(s){
+      return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    }
+
+    var jsAttente = null;
+    function chargeJsPDF(cb){
+      if (window.jspdf && window.jspdf.jsPDF) { cb(window.jspdf.jsPDF); return; }
+      if (jsAttente) { jsAttente.push(cb); return; }
+      jsAttente = [cb];
+      var s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js";
+      s.onload = function(){
+        var f = window.jspdf && window.jspdf.jsPDF;
+        var q = jsAttente; jsAttente = null; q.forEach(function(k){ k(f || null); });
+      };
+      s.onerror = function(){ var q = jsAttente; jsAttente = null; q.forEach(function(k){ k(null); }); };
+      document.head.appendChild(s);
+    }
+
+    function signatureJpeg(){
+      var c = document.createElement("canvas");
+      c.width = sp.width; c.height = sp.height;
+      var x = c.getContext("2d");
+      x.fillStyle = "#FFFFFF"; x.fillRect(0, 0, c.width, c.height);
+      x.drawImage(sp, 0, 0);
+      return c.toDataURL("image/jpeg", .92);
+    }
+
+    function manquants(){
+      var m = [];
+      if (!v("bEtab")) m.push("le nom de votre établissement");
+      if (!v("bSig")) m.push("le nom du signataire");
+      if (!v("bTel") && !v("bMail")) m.push("un téléphone ou un courriel");
+      if (!aSigne) m.push("votre signature");
+      return m;
+    }
+
+    var NOMS_POL = { grot:"Grotesque (Bricolage Grotesque)", arch:"Classique (Archivo)", hand:"Manuscrite (Caveat)" };
+    var NOMS_FOND = { encre:"Encre (#17160F)", tomate:"Tomate (#B8321F)", kraft:"Kraft (#D8C7A5)" };
+    function nomPizza(){
+      if (!etat.img) return "Aucun visuel";
+      var b = document.querySelector('.bc-piz[data-img="' + etat.img + '"] span');
+      return "Pizza " + (b ? b.textContent : "Augusto") + ", catalogue Augusto 2026";
+    }
+
+    function construitBat(cb){
+      var m = manquants();
+      if (m.length) {
+        erreur("il manque " + m.join(", ") + " —");
+        var cible = !v("bEtab") ? "bEtab" : !v("bSig") ? "bSig" : (!v("bTel") && !v("bMail")) ? "bTel" : "bSignPad";
+        var el = document.getElementById(cible);
+        if (el && el.scrollIntoView) el.scrollIntoView({ behavior:"smooth", block:"center" });
+        if (el && el.focus && cible !== "bSignPad") setTimeout(function(){ el.focus(); }, 500);
+        cb(null); return;
+      }
+      erreur(null);
+      chargeJsPDF(function(JsPDF){
+        if (!JsPDF) { erreur("le générateur de PDF n'a pas pu se charger — vérifiez votre connexion"); cb(null); return; }
+
+        var doc = new JsPDF({ unit:"mm", format:"a4", compress:true });
+        var LG = 210, MG = 16, COL = LG - 2 * MG;
+        var ENCRE = [32, 30, 26], ROUGE = [184, 50, 31], GRIS = [112, 107, 97], TRAIT = [206, 201, 190];
+        function col(c){ doc.setTextColor(c[0], c[1], c[2]); }
+        function filet(yy){ doc.setDrawColor(TRAIT[0], TRAIT[1], TRAIT[2]); doc.setLineWidth(.3); doc.line(MG, yy, LG - MG, yy); }
+        function section(t, yy){
+          doc.setFont("helvetica", "bold"); doc.setFontSize(7.6); col(ROUGE);
+          doc.text(t.toUpperCase(), MG, yy);
+        }
+
+        doc.setFillColor(ROUGE[0], ROUGE[1], ROUGE[2]); doc.rect(0, 0, LG, 4.2, "F");
+
+        /* en-tête */
+        doc.setFont("helvetica", "bold"); doc.setFontSize(23); col(ENCRE);
+        doc.text("BON À TIRER", MG, 21);
+        doc.setFont("helvetica", "normal"); doc.setFontSize(9); col(GRIS);
+        doc.text("Bâche publicitaire Augusto × GKG", MG, 27);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(11); col(ENCRE);
+        doc.text(REF, LG - MG, 18, { align:"right" });
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8.5); col(GRIS);
+        doc.text("Établi le " + DATE_FR, LG - MG, 23.5, { align:"right" });
+        doc.text("Valable 30 jours", LG - MG, 28, { align:"right" });
+        filet(33);
+
+        /* émetteur / client */
+        var y = 40;
+        section("Émetteur", y);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(7.6); col(ROUGE);
+        doc.text("CLIENT", 112, y);
+        y += 6;
+        doc.setFontSize(9);
+        var gauche = ["GKG", "Distributeur exclusif Augusto à La Réunion", "La Saline-les-Bains", "+262 692 027 061", "contact@gkg-distribution.com"];
+        var qualite = v("bFonc") ? v("bSig") + ", " + v("bFonc") : v("bSig");
+        var droite = [v("bEtab"), qualite, v("bVille") || "—", v("bTel") || "—", v("bMail") || "—"];
+        for (var i = 0; i < 5; i++) {
+          doc.setFont("helvetica", i === 0 ? "bold" : "normal");
+          col(i === 0 ? ENCRE : GRIS);
+          doc.text(gauche[i], MG, y + i * 4.7);
+          doc.setFont("helvetica", i === 0 ? "bold" : "normal");
+          col(i === 0 ? ENCRE : GRIS);
+          doc.text(String(droite[i]).slice(0, 52), 112, y + i * 4.7);
+        }
+        y += 5 * 4.7;
+        filet(y);
+
+        /* visuel */
+        y += 8;
+        section("Le visuel à imprimer", y);
+        y += 3.5;
+        var iw = COL, ih = iw * cv.height / cv.width;
+        doc.setDrawColor(TRAIT[0], TRAIT[1], TRAIT[2]); doc.setLineWidth(.4);
+        doc.rect(MG, y, iw, ih);
+        doc.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", MG, y, iw, ih);
+        y += ih + 4.2;
+        doc.setFont("helvetica", "italic"); doc.setFontSize(7.2); col(GRIS);
+        doc.text("Aperçu à l'échelle. Le fichier d'impression est produit par GKG à partir de ce visuel.", MG, y);
+        y += 4;
+        filet(y);
+
+        /* caractéristiques */
+        y += 8;
+        section("Caractéristiques d'impression", y);
+        y += 5.6;
+        var lignes = [
+          ["Support", "Bâche PVC 510 g/m², ourlets périphériques et œillets tous les 50 cm"],
+          ["Format fini", "300 × 80 cm, impression quadrichromie, recto"],
+          ["Quantité", (v("bQte") || "1") + " exemplaire" + ((parseInt(v("bQte"), 10) || 1) > 1 ? "s" : "")],
+          ["Fond", NOMS_FOND[etat.bg]],
+          ["Police", NOMS_POL[etat.font]],
+          ["Visuel", nomPizza()],
+          ["Mise en page", etat.side === "left" ? "Texte à gauche, visuel à droite" : "Texte à droite, visuel à gauche"],
+          ["Première ligne", etat.t1 ? "« " + etat.t1 + " »" : "—"],
+          ["Seconde ligne", etat.t2 ? "« " + etat.t2 + " »" : "—"],
+          ["Mention portée", etat.etab ? etat.etab : "aucune"]
+        ];
+        doc.setFontSize(8.6);
+        lignes.forEach(function(l){
+          doc.setFont("helvetica", "normal"); col(GRIS);
+          doc.text(l[0], MG, y);
+          doc.setFont("helvetica", "bold"); col(ENCRE);
+          var t = doc.splitTextToSize(l[1], COL - 42);
+          doc.text(t[0], MG + 42, y);
+          y += 4.9;
+        });
+        y += 1.6;
+        filet(y);
+
+        /* bon pour accord */
+        y += 8;
+        section("Bon pour accord", y);
+        y += 5.4;
+        var para = "Je soussigné(e) " + v("bSig") + (v("bFonc") ? ", agissant en qualité de " + v("bFonc") : "")
+                 + " pour l'établissement " + v("bEtab") + ", déclare avoir vérifié le présent bon à tirer "
+                 + "(textes, orthographe, visuel, format et quantité) et en autorise l'impression. "
+                 + "Toute erreur non signalée à ce stade ne pourra être imputée à GKG.";
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8.4); col(ENCRE);
+        var pl = doc.splitTextToSize(para, COL);
+        doc.text(pl, MG, y);
+        y += pl.length * 4.1 + 5;
+
+        var bx = LG - MG - 70, by = y, bw = 70, bh = 27;
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8.6); col(ENCRE);
+        doc.text("Fait à " + (v("bVille") || "………………"), MG, y + 6);
+        doc.text("le " + DATE_FR, MG, y + 12);
+        doc.setDrawColor(TRAIT[0], TRAIT[1], TRAIT[2]); doc.setLineWidth(.4);
+        doc.rect(bx, by, bw, bh);
+        doc.addImage(signatureJpeg(), "JPEG", bx + 1.6, by + 1.6, bw - 3.2, bh - 3.2);
+        doc.setFontSize(7); col(GRIS);
+        doc.text("Signature du client, vaut bon pour accord", LG - MG, by + bh + 4, { align:"right" });
+
+        /* pied */
+        filet(283);
+        doc.setFontSize(6.8); col(GRIS);
+        doc.text("GKG, distributeur exclusif Augusto à La Réunion · contact@gkg-distribution.com · +262 692 027 061", MG, 288);
+        doc.text(REF + " · page 1/1", LG - MG, 288, { align:"right" });
+
+        doc.setProperties({ title:"Bon à tirer " + REF + " — " + v("bEtab"), subject:"Bâche publicitaire Augusto × GKG", author:"GKG" });
+        cb(doc);
+      });
+    }
+
     function nomFichier(){
-      var base = (etat.etab || "gkg").toLowerCase()
-        .normalize("NFD").replace(/[̀-ͯ]/g, "")
-        .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "gkg";
-      return "bon-a-tirer-bache-" + base + ".png";
+      return REF + (v("bEtab") ? "-" + slug(v("bEtab")) : "") + ".pdf";
     }
-    function telecharge(apres){
-      cv.toBlob(function(b){
-        if (!b) { if (apres) apres(); return; }
-        var u = URL.createObjectURL(b), a = document.createElement("a");
-        a.href = u; a.download = nomFichier();
-        document.body.appendChild(a); a.click(); a.remove();
-        setTimeout(function(){ URL.revokeObjectURL(u); }, 5000);
-        if (apres) apres();
-      }, "image/png");
+    function confirme(){
+      var ok = document.getElementById("bacheOk"), r = document.getElementById("bacheRef");
+      if (r) r.textContent = REF;
+      if (ok) ok.classList.add("on");
     }
-    var dl = document.getElementById("bDl");
-    if (dl) dl.addEventListener("click", function(){ telecharge(null); });
+
+    var bPdf = document.getElementById("bPdf");
+    if (bPdf) bPdf.addEventListener("click", function(){
+      occupe(bPdf, true);
+      construitBat(function(doc){
+        occupe(bPdf, false);
+        if (!doc) return;
+        doc.save(nomFichier());
+        confirme();
+      });
+    });
 
     var send = document.getElementById("bSend");
     if (send) send.addEventListener("click", function(){
-      var NOMS = { grot:"Grotesque", arch:"Classique", hand:"Manuscrite" };
-      var FONDS = { encre:"Encre", tomate:"Tomate", kraft:"Kraft" };
-      var piz = etat.img ? etat.img.replace(/^pizza-|-augusto.*$/g, "").replace(/-/g, " ") : "aucune";
-      var corps = "Bonjour,\n\nVoici mon bon à tirer pour la bâche (le visuel est en pièce jointe).\n\n"
-        + "Établissement : " + (etat.etab || "—") + "\n"
-        + "Première ligne : " + etat.t1 + "\n"
-        + "Seconde ligne : " + etat.t2 + "\n"
-        + "Police : " + NOMS[etat.font] + "\n"
-        + "Fond : " + FONDS[etat.bg] + "\n"
-        + "Pizza : " + piz + "\n"
-        + "Texte : " + (etat.side === "left" ? "à gauche" : "à droite") + "\n\n"
-        + "Merci de me confirmer avant impression.\n";
-      telecharge(function(){
-        var ok = document.getElementById("bacheOk");
-        if (ok) ok.classList.add("on");
-        window.location.href = "mailto:contact@gkg-distribution.com?subject="
-          + encodeURIComponent("Bon à tirer bâche — " + (etat.etab || "nouvel établissement"))
-          + "&body=" + encodeURIComponent(corps);
+      occupe(send, true);
+      construitBat(function(doc){
+        occupe(send, false);
+        if (!doc) return;
+        doc.save(nomFichier());
+        confirme();
+        var corps = "Bonjour,\n\nVoici mon bon à tirer signé pour la bâche.\n\n"
+          + "Référence : " + REF + "\n"
+          + "Établissement : " + v("bEtab") + "\n"
+          + "Signataire : " + v("bSig") + (v("bFonc") ? " (" + v("bFonc") + ")" : "") + "\n"
+          + "Téléphone : " + (v("bTel") || "—") + "\n"
+          + "Commune : " + (v("bVille") || "—") + "\n"
+          + "Quantité : " + (v("bQte") || "1") + "\n\n"
+          + "Le PDF « " + nomFichier() + " » vient d'être enregistré sur mon appareil, je le joins à ce message.\n";
+        setTimeout(function(){
+          window.location.href = "mailto:contact@gkg-distribution.com?subject="
+            + encodeURIComponent("Bon à tirer " + REF + " — " + v("bEtab"))
+            + "&body=" + encodeURIComponent(corps);
+        }, 700);
       });
+    });
+
+    var dl = document.getElementById("bDl");
+    if (dl) dl.addEventListener("click", function(){
+      cv.toBlob(function(b){
+        if (!b) return;
+        var u = URL.createObjectURL(b), a = document.createElement("a");
+        a.href = u; a.download = "visuel-bache-" + (slug(v("bEtab")) || "gkg") + ".png";
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(u); }, 5000);
+      }, "image/png");
     });
 
     ["500 100px \"Bricolage Grotesque\"", "800 100px \"Bricolage Grotesque\"",

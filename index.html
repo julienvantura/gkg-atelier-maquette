@@ -9,7 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✏️</text></svg>">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Archivo:wght@400;500;600;700&family=Caveat:wght@500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=e6b600d2">
+  <link rel="stylesheet" href="css/styles.css?v=26df4623">
 </head>
 <body>
 <script>try{if(localStorage.getItem("gkg_theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
@@ -895,14 +895,36 @@
           </div>
           <p class="bc-help">Les visuels sont ceux du catalogue Augusto : vous n'avez pas de photo à fournir.</p>
         </div>
+
+        <div class="bc-group bc-wide reveal">
+          <span class="bc-step">d.</span>
+          <h3>Vos coordonnées, pour le bon à tirer</h3>
+          <p class="bc-help bc-help-top">Ces informations figurent sur le document officiel que vous signez et que GKG conserve.</p>
+          <div class="bc-fields">
+            <div><label class="bc-lab" for="bSig">Nom du signataire</label><input id="bSig" class="bc-in" type="text" maxlength="42" placeholder="Marie Hoarau" autocomplete="name"></div>
+            <div><label class="bc-lab" for="bFonc">Fonction</label><input id="bFonc" class="bc-in" type="text" maxlength="32" placeholder="Gérante" autocomplete="organization-title"></div>
+            <div><label class="bc-lab" for="bVille">Commune</label><input id="bVille" class="bc-in" type="text" maxlength="32" placeholder="Saint-Gilles" autocomplete="address-level2"></div>
+            <div><label class="bc-lab" for="bTel">Téléphone</label><input id="bTel" class="bc-in" type="tel" maxlength="24" placeholder="0692 00 00 00" autocomplete="tel"></div>
+            <div><label class="bc-lab" for="bMail">Courriel</label><input id="bMail" class="bc-in" type="email" maxlength="64" placeholder="contact@mon-etablissement.re" autocomplete="email"></div>
+            <div><label class="bc-lab" for="bQte">Quantité</label><input id="bQte" class="bc-in" type="number" min="1" max="30" value="1"></div>
+          </div>
+          <span class="bc-lab">Votre signature <em>elle sera reproduite sur le bon à tirer</em></span>
+          <div class="bc-sign">
+            <canvas id="bSignPad" width="1040" height="300" aria-label="Zone de signature, dessinez votre signature"></canvas>
+            <span class="bc-sign-hint" id="bSignHint">signez ici, à la souris ou au doigt</span>
+            <button type="button" class="bc-sign-clear" id="bSignClear">Effacer</button>
+          </div>
+        </div>
       </div>
 
       <div class="bache-actions reveal">
-        <button class="btn btn-ink" type="button" id="bDl">Télécharger le bon à tirer <span class="arrow">↓</span></button>
-        <button class="btn btn-ghost" type="button" id="bSend">Envoyer à GKG <span class="arrow">→</span></button>
+        <button class="btn btn-ink" type="button" id="bPdf">Générer le bon à tirer <span class="arrow">↓</span></button>
+        <button class="btn btn-ghost" type="button" id="bSend">Envoyer le BAT à GKG <span class="arrow">→</span></button>
+        <button class="btn btn-ghost bc-mini" type="button" id="bDl">Le visuel seul (PNG)</button>
       </div>
-      <p class="bache-ok" id="bacheOk">bon à tirer téléchargé — joignez-le à votre message ✓</p>
-      <p class="bache-legal reveal">Le bon à tirer est un aperçu. GKG le reprend au format d'impression, vérifie les textes et revient vers vous avant de lancer la production.</p>
+      <p class="bache-err" id="bacheErr" role="alert"></p>
+      <p class="bache-ok" id="bacheOk">bon à tirer <b id="bacheRef"></b> enregistré ✓</p>
+      <p class="bache-legal reveal">Le bon à tirer est un document PDF reprenant votre visuel, les caractéristiques d'impression, vos coordonnées et votre signature. En le signant, vous validez les textes et le visuel. GKG le reprend au format d'impression et lance la production.</p>
 
     </div>
   </div>
@@ -1140,6 +1162,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="js/app.js?v=92d5e350"></script>
+<script src="js/app.js?v=dc433e2c"></script>
 </body>
 </html>

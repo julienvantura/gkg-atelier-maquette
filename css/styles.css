@@ -917,3 +917,35 @@
     .oeillet.o1,.oeillet.o3{left:6px} .oeillet.o2,.oeillet.o4{right:6px}
   }
   @media(max-width:420px){.bc-pizgrid{grid-template-columns:repeat(2,1fr)}}
+
+  /* coordonnées + signature du bon à tirer */
+  .bc-help-top{margin-top:10px;margin-bottom:4px}
+  .bc-fields{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 22px;margin-bottom:6px}
+  .bc-fields .bc-lab{margin-top:16px}
+  .bc-sign{position:relative;margin-top:6px;max-width:560px}
+  .bc-sign canvas{
+    display:block;width:100%;height:auto;aspect-ratio:1040/300;
+    background:#FFFFFF;border:1.5px dashed var(--line);cursor:crosshair;touch-action:none;
+  }
+  .bc-sign.signe canvas{border-style:solid;border-color:var(--tomate)}
+  .bc-sign-hint{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;
+    font-family:var(--font-hand);font-size:20px;color:#9C968A;transition:opacity .3s;
+  }
+  .bc-sign.signe .bc-sign-hint{opacity:0}
+  .bc-sign-clear{
+    position:absolute;right:10px;bottom:10px;background:#FFFFFF;border:1.5px solid #201E19;color:#201E19;
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    padding:7px 13px;cursor:pointer;transition:background .25s,color .25s;
+  }
+  .bc-sign-clear:hover{background:#201E19;color:#FFFFFF}
+  .bc-mini{padding:12px 20px;font-size:11px}
+  .bache-err{
+    margin-top:16px;font-family:var(--font-hand);font-size:21px;color:var(--tomate);
+    display:none;transform:rotate(-1deg);
+  }
+  .bache-err.on{display:inline-block}
+  .bache-ok b{font-family:var(--font-mono);font-size:16px;letter-spacing:.06em}
+  .btn[data-busy="1"]{opacity:.55;pointer-events:none}
+  @media(max-width:860px){.bc-fields{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.bc-fields{grid-template-columns:1fr}}
