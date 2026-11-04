@@ -25,8 +25,8 @@
     --tape:rgba(120,106,78,.75);
     --nav-glass:rgba(23,22,15,.88);
     --card-glass:rgba(37,36,27,.6);
-    --font-display:'Bricolage Grotesque','Arial Black',sans-serif;
-    --font-body:'Archivo','Helvetica Neue',Arial,sans-serif;
+    --font-display:'Poppins','Helvetica Neue',Arial,sans-serif;
+    --font-body:'Poppins','Helvetica Neue',Arial,sans-serif;
     --font-hand:'Caveat','Comic Sans MS',cursive;
     --font-mono:'Spline Sans Mono','Courier New',monospace;
   }
@@ -198,7 +198,7 @@
   .burger i:nth-child(2){top:25px}
   .burger.open i:nth-child(1){top:20px;transform:rotate(45deg)}
   .burger.open i:nth-child(2){top:20px;transform:rotate(-45deg)}
-  @media(max-width:1180px){.nav-links{display:none}.cs-nav{display:none}.burger{display:block}}
+  @media(max-width:1300px){.nav-links{display:none}.cs-nav{display:none}.burger{display:block}}
   @media(max-width:520px){.nav .btn{display:none}}
 
   /* ---------- menu mobile ---------- */
@@ -247,7 +247,7 @@
   .hero h1 .hline-in{display:block;will-change:transform}
   .hero h1 .tomate{color:var(--tomate)}
   .hl{position:relative;white-space:nowrap;z-index:0}
-  .hl-svg{position:absolute;left:-5%;top:6%;width:110%;height:92%;z-index:-1;overflow:visible;pointer-events:none;mix-blend-mode:screen}
+  .hl-svg{position:absolute;left:-5%;top:-7%;width:110%;height:92%;z-index:-1;overflow:visible;pointer-events:none;mix-blend-mode:screen}
   #hlStroke{stroke:var(--stabilo);stroke-width:30;opacity:.55}
   .hero-sub{margin-top:24px;color:var(--soft);font-size:clamp(16px,1.5vw,19px);max-width:48ch}
   .hero-sub strong{color:var(--ink);font-weight:700}
@@ -868,7 +868,7 @@
   .bc-opts button span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
   .bc-font b{font-size:26px;line-height:1;font-weight:800;color:var(--ink)}
   .bc-font.f-grot b{font-family:var(--font-display)}
-  .bc-font.f-arch b{font-family:var(--font-body)}
+  .bc-font.f-arch b{font-family:'Archivo',Arial,sans-serif}
   .bc-font.f-hand b{font-family:var(--font-hand)}
   .bc-bg i{width:100%;height:26px;border:1.5px solid var(--ink);display:block}
   .bc-side .lay{width:100%;height:26px;border:1.5px solid var(--line);display:block;position:relative}
@@ -950,3 +950,19 @@
   @media(max-width:860px){.bc-fields{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.bc-fields{grid-template-columns:1fr}}
   .bc-piege{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+  /* ---------- RSE ---------- */
+  .engage-teaser{
+    margin-top:56px;display:flex;gap:clamp(18px,3vw,34px);align-items:center;flex-wrap:wrap;
+    border-top:2px solid var(--ink);padding-top:28px;
+  }
+  .engage-teaser p{color:var(--soft);font-size:clamp(15px,1.5vw,17px);max-width:56ch;flex:1 1 320px}
+  .rse-note{
+    font-family:var(--font-hand);font-size:clamp(20px,2.3vw,27px);color:var(--pencil);
+    transform:rotate(-1.5deg);display:inline-block;margin-top:clamp(36px,4vw,52px);
+  }
+  .rse-aveu{
+    margin-top:12px;max-width:72ch;color:var(--soft);font-size:clamp(15px,1.5vw,17px);line-height:1.7;
+    border-left:3px solid var(--tomate);padding-left:20px;
+  }
+  .rse-aveu b{color:var(--ink);font-weight:700}

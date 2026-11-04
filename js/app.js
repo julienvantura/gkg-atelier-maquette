@@ -268,6 +268,7 @@
     "/pizzas": "pizzas",
     "/solution": "solution",
     "/gkg": "gkg",
+    "/rse": "rse",
     "/bache": "bache",
     "/contact": "contact",
     "/mentions-legales": "legal"
@@ -277,6 +278,7 @@
     pizzas: "La carte — GKG",
     solution: "La solution — GKG",
     gkg: "Pourquoi GKG — GKG",
+    rse: "RSE & développement durable — GKG",
     bache: "Ma bâche — GKG",
     contact: "Contact — GKG",
     legal: "Mentions légales — GKG"
@@ -466,8 +468,8 @@
       kraft:  { bg:"#D8C7A5", ink:"#201E19", soft:"#5F5A4B", ombre:"rgba(40,34,22,.3)" }
     };
     var FONTS = {
-      grot: { fam:'"Bricolage Grotesque", "Arial Black", sans-serif', w1:"500", w2:"800", caps:true,  dep:210 },
-      arch: { fam:'"Archivo", Arial, sans-serif',                     w1:"500", w2:"700", caps:true,  dep:196 },
+      grot: { fam:'"Poppins", Arial, sans-serif',  w1:"500", w2:"800", caps:true,  dep:196 },
+      arch: { fam:'"Archivo", Arial, sans-serif', w1:"500", w2:"700", caps:true,  dep:206 },
       hand: { fam:'"Caveat", cursive',                                w1:"600", w2:"600", caps:false, dep:286 }
     };
     var etat = { t1:"Ici, pizzas artisanales", t2:"à partager ou pas…", etab:"",
@@ -701,7 +703,7 @@
       return m;
     }
 
-    var NOMS_POL = { grot:"Grotesque (Bricolage Grotesque)", arch:"Classique (Archivo)", hand:"Manuscrite (Caveat)" };
+    var NOMS_POL = { grot:"Marque (Poppins)", arch:"Classique (Archivo)", hand:"Manuscrite (Caveat)" };
     var NOMS_FOND = { encre:"Encre (#17160F)", tomate:"Tomate (#B8321F)", kraft:"Kraft (#D8C7A5)" };
     function nomPizza(){
       if (!etat.img) return "Aucun visuel";
@@ -924,7 +926,7 @@
       }, "image/png");
     });
 
-    ["500 100px \"Bricolage Grotesque\"", "800 100px \"Bricolage Grotesque\"",
+    ["500 100px Poppins", "800 100px Poppins",
      "500 100px Archivo", "700 100px Archivo", "600 100px Caveat",
      "500 30px \"Spline Sans Mono\""].forEach(function(f){
       try { document.fonts && document.fonts.load(f); } catch (e) {}
