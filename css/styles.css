@@ -198,7 +198,7 @@
   .burger i:nth-child(2){top:25px}
   .burger.open i:nth-child(1){top:20px;transform:rotate(45deg)}
   .burger.open i:nth-child(2){top:20px;transform:rotate(-45deg)}
-  @media(max-width:1080px){.nav-links{display:none}.cs-nav{display:none}.burger{display:block}}
+  @media(max-width:1180px){.nav-links{display:none}.cs-nav{display:none}.burger{display:block}}
   @media(max-width:520px){.nav .btn{display:none}}
 
   /* ---------- menu mobile ---------- */
@@ -809,3 +809,111 @@
   .craft .eyebrow,.craft .eyebrow::before,.craft .craft-item .n,.simu .eyebrow,.simu .eyebrow::before,.carte .eyebrow,.carte .eyebrow::before,.carte .pola .stamp{color:var(--tomate-on-kraft)}
   .craft .eyebrow::before,.simu .eyebrow::before,.carte .eyebrow::before{background:var(--tomate-on-kraft)}
   .carte .pola .stamp{border-color:var(--tomate-on-kraft)}
+
+
+  /* ==================================================================== */
+  /* PAGE : MA BÂCHE                                                      */
+  /* ==================================================================== */
+  .bache-stage{
+    position:relative;background:var(--card);border:2px solid var(--ink);
+    box-shadow:8px 11px 0 var(--shadow);padding:14px;transform:rotate(-.4deg);
+  }
+  .bache-stage canvas{display:block;width:100%;height:auto;background:#17160F}
+  .oeillet{
+    position:absolute;width:15px;height:15px;border-radius:50%;
+    background:var(--paper);border:2.5px solid var(--ink);z-index:2;
+  }
+  .oeillet.o1{top:9px;left:9px} .oeillet.o2{top:9px;right:9px}
+  .oeillet.o3{bottom:9px;left:9px} .oeillet.o4{bottom:9px;right:9px}
+  .bache-note{
+    font-family:var(--font-hand);font-size:clamp(17px,1.9vw,22px);color:var(--pencil);
+    transform:rotate(-1deg);display:inline-block;margin-top:18px;
+  }
+
+  .bache-ctrl{
+    display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,2.4vw,28px);
+    margin-top:clamp(30px,4vw,46px);align-items:start;
+  }
+  .bc-group{
+    position:relative;background:var(--paper-2);border:1px solid var(--edge);
+    box-shadow:4px 6px 0 var(--shadow);padding:26px 24px 28px;
+  }
+  .bc-group.bc-wide{grid-column:1 / -1}
+  .bc-step{
+    font-family:var(--font-hand);font-size:26px;color:var(--tomate);
+    position:absolute;top:14px;right:20px;line-height:1;
+  }
+  .bc-group h3{font-family:var(--font-display);font-weight:800;font-size:20px;letter-spacing:-.01em}
+  .bc-lab{
+    display:block;margin-top:20px;margin-bottom:8px;
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);
+  }
+  .bc-lab em{font-style:normal;text-transform:none;letter-spacing:.04em;opacity:.7}
+  .bc-in{
+    width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--line);
+    padding:9px 2px;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--ink);
+  }
+  .bc-in::placeholder{color:var(--soft);font-weight:500}
+  .bc-in:focus{outline:none;border-bottom-color:var(--tomate)}
+
+  .bc-opts{display:flex;gap:10px;flex-wrap:wrap}
+  .bc-opts button{
+    flex:1 1 0;min-width:92px;display:flex;flex-direction:column;align-items:center;gap:7px;
+    padding:12px 10px;background:var(--card);border:1.5px solid var(--line);cursor:pointer;
+    color:var(--soft);transition:border-color .25s,color .25s,background .25s;
+  }
+  .bc-opts button:hover{border-color:var(--soft);color:var(--ink)}
+  .bc-opts button.is-on{border-color:var(--tomate);border-width:2px;color:var(--ink)}
+  .bc-opts button.is-on span{color:var(--tomate)}
+  .bc-opts button span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+  .bc-font b{font-size:26px;line-height:1;font-weight:800;color:var(--ink)}
+  .bc-font.f-grot b{font-family:var(--font-display)}
+  .bc-font.f-arch b{font-family:var(--font-body)}
+  .bc-font.f-hand b{font-family:var(--font-hand)}
+  .bc-bg i{width:100%;height:26px;border:1.5px solid var(--ink);display:block}
+  .bc-side .lay{width:100%;height:26px;border:1.5px solid var(--line);display:block;position:relative}
+  .bc-side .lay::before{content:"";position:absolute;top:5px;bottom:5px;width:38%;background:var(--soft)}
+  .bc-side .lay::after{content:"";position:absolute;top:4px;width:17px;height:17px;border-radius:50%;background:var(--tomate)}
+  .bc-side .lay-l::before{left:6px} .bc-side .lay-l::after{right:10px}
+  .bc-side .lay-r::before{right:6px} .bc-side .lay-r::after{left:10px}
+
+  .bc-pizgrid{display:grid;grid-template-columns:repeat(9,1fr);gap:10px;margin-top:8px}
+  .bc-piz{
+    display:flex;flex-direction:column;align-items:center;gap:6px;padding:9px 5px 10px;
+    background:var(--card);border:1.5px solid var(--line);cursor:pointer;
+    transition:border-color .25s,background .25s;
+  }
+  .bc-piz img{width:100%;max-width:62px;height:auto;display:block}
+  .bc-piz span{
+    font-family:var(--font-mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--soft);text-align:center;line-height:1.3;
+  }
+  .bc-piz:hover{border-color:var(--soft)}
+  .bc-piz.is-on{border-color:var(--tomate);border-width:2px}
+  .bc-piz.is-on span{color:var(--tomate)}
+  .bc-none i{
+    font-style:normal;font-size:26px;color:var(--soft);display:grid;place-items:center;
+    width:100%;max-width:62px;aspect-ratio:1;
+  }
+  .bc-help{margin-top:16px;font-family:var(--font-mono);font-size:11px;color:var(--soft);line-height:1.6}
+
+  .bache-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(28px,3.6vw,42px)}
+  .bache-legal{margin-top:18px;font-family:var(--font-mono);font-size:11px;color:var(--soft);line-height:1.7;max-width:70ch}
+  .bache-ok{
+    margin-top:16px;font-family:var(--font-hand);font-size:21px;color:var(--basilic);
+    display:none;transform:rotate(-1deg);
+  }
+  .bache-ok.on{display:inline-block}
+
+  @media(max-width:1000px){
+    .bc-pizgrid{grid-template-columns:repeat(5,1fr)}
+  }
+  @media(max-width:760px){
+    .bache-ctrl{grid-template-columns:1fr}
+    .bc-pizgrid{grid-template-columns:repeat(3,1fr)}
+    .bache-stage{padding:9px;transform:none}
+    .oeillet{width:11px;height:11px;border-width:2px}
+    .oeillet.o1,.oeillet.o2{top:6px} .oeillet.o3,.oeillet.o4{bottom:6px}
+    .oeillet.o1,.oeillet.o3{left:6px} .oeillet.o2,.oeillet.o4{right:6px}
+  }
+  @media(max-width:420px){.bc-pizgrid{grid-template-columns:repeat(2,1fr)}}

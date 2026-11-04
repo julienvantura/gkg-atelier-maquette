@@ -268,6 +268,7 @@
     "/pizzas": "pizzas",
     "/solution": "solution",
     "/gkg": "gkg",
+    "/bache": "bache",
     "/contact": "contact",
     "/mentions-legales": "legal"
   };
@@ -276,6 +277,7 @@
     pizzas: "La carte — GKG",
     solution: "La solution — GKG",
     gkg: "Pourquoi GKG — GKG",
+    bache: "Ma bâche — GKG",
     contact: "Contact — GKG",
     legal: "Mentions légales — GKG"
   };
@@ -451,6 +453,214 @@
   INTRO_DELAY = animOn ? 1.4 : 0;
   if (animOn) intro();
   activate(parseRoute());
+  /* ---------- composeur de bâche ---------- */
+  (function(){
+    var cv = document.getElementById("bacheCanvas");
+    if (!cv) return;
+    var ctx = cv.getContext("2d");
+    var W = cv.width, H = cv.height, PAD = 150;
+
+    var THEMES = {
+      encre:  { bg:"#17160F", ink:"#F4EFE4", soft:"#B9B4A4", ombre:"rgba(0,0,0,.5)" },
+      tomate: { bg:"#B8321F", ink:"#FFF7F3", soft:"#F3CDC3", ombre:"rgba(60,10,4,.42)" },
+      kraft:  { bg:"#D8C7A5", ink:"#201E19", soft:"#5F5A4B", ombre:"rgba(40,34,22,.3)" }
+    };
+    var FONTS = {
+      grot: { fam:'"Bricolage Grotesque", "Arial Black", sans-serif', w1:"500", w2:"800", caps:true,  dep:210 },
+      arch: { fam:'"Archivo", Arial, sans-serif',                     w1:"500", w2:"700", caps:true,  dep:196 },
+      hand: { fam:'"Caveat", cursive',                                w1:"600", w2:"600", caps:false, dep:286 }
+    };
+    var etat = { t1:"Ici, pizzas artisanales", t2:"à partager ou pas…", etab:"",
+                 font:"grot", bg:"encre", side:"left", img:"pizza-margherita-augusto.webp" };
+
+    var cache = {};
+    function img(src, cb){
+      if (cache[src]) { cb(cache[src]); return; }
+      var im = new Image();
+      im.onload = function(){ cache[src] = im; cb(im); };
+      im.onerror = function(){ cb(null); };
+      im.src = src;
+    }
+    function teinte(im, couleur){
+      var c = document.createElement("canvas");
+      c.width = im.width; c.height = im.height;
+      var x = c.getContext("2d");
+      x.drawImage(im, 0, 0);
+      x.globalCompositeOperation = "source-in";
+      x.fillStyle = couleur; x.fillRect(0, 0, c.width, c.height);
+      return c;
+    }
+    function taille(txt, maxW, poids, fam, depart){
+      var s = depart;
+      while (s > 26) {
+        ctx.font = poids + " " + s + "px " + fam;
+        if (ctx.measureText(txt).width <= maxW) break;
+        s -= 3;
+      }
+      return s;
+    }
+
+    function dessine(){
+      var th = THEMES[etat.bg], fo = FONTS[etat.font];
+      var aGauche = etat.side === "left";
+      var besoin = ["assets/img/augusto-bien-plus-qu-une-pizza.png"];
+      if (etat.img) besoin.push("assets/img/" + etat.img);
+      var reste = besoin.length;
+      besoin.forEach(function(s){ img(s, function(){ if (--reste === 0) peint(th, fo, aGauche); }); });
+    }
+
+    function peint(th, fo, aGauche){
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = th.bg; ctx.fillRect(0, 0, W, H);
+      /* léger dégradé pour donner du relief */
+      var g = ctx.createLinearGradient(aGauche ? W : 0, 0, aGauche ? 0 : W, H);
+      g.addColorStop(0, "rgba(0,0,0,.18)"); g.addColorStop(.55, "rgba(0,0,0,0)");
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+      var zone = 0, cx = 0;
+      var pizza = etat.img ? cache["assets/img/" + etat.img] : null;
+      if (pizza) {
+        var hp = 624, wp = hp * pizza.width / pizza.height;
+        if (wp > 760) { wp = 760; hp = wp * pizza.height / pizza.width; }
+        zone = wp + 90;
+        cx = aGauche ? (W - PAD - wp / 2) : (PAD + wp / 2);
+        ctx.save();
+        ctx.shadowColor = th.ombre; ctx.shadowBlur = 46;
+        ctx.shadowOffsetX = aGauche ? -16 : 16; ctx.shadowOffsetY = 20;
+        ctx.drawImage(pizza, cx - wp / 2, H / 2 - 22 - hp / 2, wp, hp);
+        ctx.restore();
+      }
+
+      var x0 = PAD, x1 = W - PAD;
+      if (pizza) { if (aGauche) x1 = W - PAD - zone; else x0 = PAD + zone; }
+      var colW = x1 - x0;
+      var align = pizza ? (aGauche ? "left" : "right") : "center";
+      var ax = align === "left" ? x0 : align === "right" ? x1 : (x0 + x1) / 2;
+
+      var t1 = fo.caps ? etat.t1.toUpperCase() : etat.t1;
+      var t2 = fo.caps ? etat.t2.toUpperCase() : etat.t2;
+      var s2 = taille(t2, colW, fo.w2, fo.fam, fo.dep);
+      var s1 = Math.round(s2 * 0.62);
+      s1 = Math.min(s1, taille(t1, colW, fo.w1, fo.fam, s1));
+
+      var h1 = t1 ? s1 * 1.02 : 0, h2 = t2 ? s2 * 1.0 : 0;
+      var inter = (t1 && t2) ? s2 * 0.26 : 0;
+      var bloc = h1 + inter + h2;
+      var top = H / 2 - bloc / 2 - (etat.etab ? 26 : 0);
+
+      ctx.textAlign = align; ctx.textBaseline = "alphabetic";
+      if (t1) {
+        ctx.font = fo.w1 + " " + s1 + "px " + fo.fam;
+        ctx.fillStyle = th.soft;
+        ctx.fillText(t1, ax, top + s1 * 0.82);
+      }
+      if (t2) {
+        ctx.font = fo.w2 + " " + s2 + "px " + fo.fam;
+        ctx.fillStyle = th.ink;
+        ctx.fillText(t2, ax, top + h1 + inter + s2 * 0.82);
+      }
+      if (etat.etab) {
+        ctx.font = '500 30px "Spline Sans Mono", monospace';
+        if ("letterSpacing" in ctx) ctx.letterSpacing = "6px";
+        ctx.fillStyle = th.soft;
+        ctx.fillText(etat.etab.toUpperCase(), ax, top + bloc + 74);
+        if ("letterSpacing" in ctx) ctx.letterSpacing = "0px";
+      }
+
+      var logo = cache["assets/img/augusto-bien-plus-qu-une-pizza.png"];
+      if (logo) {
+        var wl = 262, hl = wl * logo.height / logo.width;
+        var lx = (pizza && !aGauche) ? 56 : W - 56 - wl;
+        ctx.globalAlpha = .92;
+        ctx.drawImage(teinte(logo, th.ink), lx, H - 48 - hl, wl, hl);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    var prevu = false;
+    function planifie(){
+      if (prevu) return;
+      prevu = true;
+      requestAnimationFrame(function(){ prevu = false; dessine(); });
+    }
+
+    function lie(id, cle){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener("input", function(){ etat[cle] = el.value; planifie(); });
+    }
+    lie("bTxt1", "t1"); lie("bTxt2", "t2"); lie("bEtab", "etab");
+
+    function groupe(sel, attr, cle){
+      var btns = [].slice.call(document.querySelectorAll(sel));
+      btns.forEach(function(b){
+        b.addEventListener("click", function(){
+          btns.forEach(function(o){ o.classList.remove("is-on"); o.setAttribute("aria-checked", "false"); });
+          b.classList.add("is-on"); b.setAttribute("aria-checked", "true");
+          etat[cle] = b.getAttribute(attr);
+          planifie();
+        });
+      });
+    }
+    groupe(".bc-font", "data-font", "font");
+    groupe(".bc-bg", "data-bg", "bg");
+    groupe(".bc-side", "data-side", "side");
+    groupe(".bc-piz", "data-img", "img");
+
+    function nomFichier(){
+      var base = (etat.etab || "gkg").toLowerCase()
+        .normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "gkg";
+      return "bon-a-tirer-bache-" + base + ".png";
+    }
+    function telecharge(apres){
+      cv.toBlob(function(b){
+        if (!b) { if (apres) apres(); return; }
+        var u = URL.createObjectURL(b), a = document.createElement("a");
+        a.href = u; a.download = nomFichier();
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(u); }, 5000);
+        if (apres) apres();
+      }, "image/png");
+    }
+    var dl = document.getElementById("bDl");
+    if (dl) dl.addEventListener("click", function(){ telecharge(null); });
+
+    var send = document.getElementById("bSend");
+    if (send) send.addEventListener("click", function(){
+      var NOMS = { grot:"Grotesque", arch:"Classique", hand:"Manuscrite" };
+      var FONDS = { encre:"Encre", tomate:"Tomate", kraft:"Kraft" };
+      var piz = etat.img ? etat.img.replace(/^pizza-|-augusto.*$/g, "").replace(/-/g, " ") : "aucune";
+      var corps = "Bonjour,\n\nVoici mon bon à tirer pour la bâche (le visuel est en pièce jointe).\n\n"
+        + "Établissement : " + (etat.etab || "—") + "\n"
+        + "Première ligne : " + etat.t1 + "\n"
+        + "Seconde ligne : " + etat.t2 + "\n"
+        + "Police : " + NOMS[etat.font] + "\n"
+        + "Fond : " + FONDS[etat.bg] + "\n"
+        + "Pizza : " + piz + "\n"
+        + "Texte : " + (etat.side === "left" ? "à gauche" : "à droite") + "\n\n"
+        + "Merci de me confirmer avant impression.\n";
+      telecharge(function(){
+        var ok = document.getElementById("bacheOk");
+        if (ok) ok.classList.add("on");
+        window.location.href = "mailto:contact@gkg-distribution.com?subject="
+          + encodeURIComponent("Bon à tirer bâche — " + (etat.etab || "nouvel établissement"))
+          + "&body=" + encodeURIComponent(corps);
+      });
+    });
+
+    ["500 100px \"Bricolage Grotesque\"", "800 100px \"Bricolage Grotesque\"",
+     "500 100px Archivo", "700 100px Archivo", "600 100px Caveat",
+     "500 30px \"Spline Sans Mono\""].forEach(function(f){
+      try { document.fonts && document.fonts.load(f); } catch (e) {}
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(planifie);
+    window.addEventListener("hashchange", function(){
+      if (location.hash === "#/bache") planifie();
+    });
+    planifie();
+  })();
+
   /* filet de sécurité : si le ticker GSAP est gelé (onglet en arrière-plan), on lève le rideau quand même */
   setTimeout(function(){
     if (wipe.classList.contains("active")) {
